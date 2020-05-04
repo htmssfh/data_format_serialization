@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".demo.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_self_input_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textColor="#333333"
+            android:padding="10dp"
+            android:text="点击输入json格式解析" />
+
+        <Button
+            android:textColor="#333333"
+            android:id="@+id/btn_default_short_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:padding="10dp"
+            android:text="要short，服务端返回其它格式的各种情况" />
+
+        <Button
+            android:textColor="#333333"
+            android:id="@+id/btn_default_int_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:padding="10dp"
+            android:text="要int，服务端返回其它格式的各种情况" />
+
+        <Button
+            android:textColor="#333333"
+            android:id="@+id/btn_default_long_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:padding="10dp"
+            android:text="要long，服务端返回其它格式的各种情况" />
+
+        <Button
+            android:textColor="#333333"
+            android:id="@+id/btn_default_float_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:padding="10dp"
+            android:text="要float，服务端返回其它格式的各种情况" />
+
+        <Button
+            android:textColor="#333333"
+            android:id="@+id/btn_default_double_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:padding="10dp"
+            android:text="要double，服务端返回其它格式的各种情况" />
+
+
+        <Button
+            android:textColor="#333333"
+            android:id="@+id/btn_default_string_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:padding="10dp"
+            android:text="要string，服务端返回其它格式的各种情况" />
+
+        <Button
+            android:textColor="#333333"
+            android:id="@+id/btn_default_object_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:padding="10dp"
+            android:text="要object，服务端返回其它格式的各种情况" />
+
+        <Button
+            android:textColor="#333333"
+            android:id="@+id/btn_default_array_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:padding="10dp"
+            android:text="要array，服务端返回其它格式的各种情况" />
+
+        <Button
+            android:textColor="#333333"
+            android:id="@+id/btn_default_map_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:padding="10dp"
+            android:text="要map，服务端返回其它格式的各种情况" />
+
+    </LinearLayout>
+
+</ScrollView>

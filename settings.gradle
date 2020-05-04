@@ -1,0 +1,3 @@
+rootProject.name='data_format_serialization'
+include ':app'
+include ':library'
