@@ -16,7 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DataInputJsonActivity"/>
+        <activity android:name=".DataJsonActivity"/>
+        <activity android:name=".DataParserDetailActivity"/>
     </application>
 
 </manifest>

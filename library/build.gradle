@@ -1,5 +1,6 @@
-apply plugin: 'java-library'
-apply plugin: 'kotlin'
+apply {
+    from "${project.rootDir.path}/library.gradle"
+}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -7,5 +8,3 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
 }
 
-sourceCompatibility = "7"
-targetCompatibility = "7"
