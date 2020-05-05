@@ -102,7 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:padding="10dp"
-            android:text="传入非标准json格式、传入html的格式或其它非json格式" />
+            android:text="传入非标准json格式、传入html的格式或其它非json格式,程序崩溃" />
 
 
     </LinearLayout>

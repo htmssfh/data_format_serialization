@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         mViewBinding?.btnDefaultObjectTest.setOnClickListener(this)
         mViewBinding?.btnDefaultArrayTest.setOnClickListener(this)
         mViewBinding?.btnDefaultMapTest.setOnClickListener(this)
+        mViewBinding?.btnDefaultOtherTest.setOnClickListener(this)
 
     }
 

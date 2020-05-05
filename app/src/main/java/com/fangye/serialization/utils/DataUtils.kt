@@ -11,6 +11,125 @@ import com.fangye.serialization.entity.JsonItemEntity
  */
 class DataUtils {
     companion object{
+        private const val XML_NAME = "直接传入xml格式的数据，传入非json数据，程序崩溃"
+        private const val TEXT_NAME = "直接传入一个字符串，传入非json数据，程序崩溃"
+        private const val TEXT_ILLEGAL_JSON_NAME = "传入一个非json数据，程序崩溃"
+
+        private const val TEXT_ILLEGAL_JSON = "{\"id\":\"1111\"\"name\":\"我不是一个json\"}"
+        private const val TEXT = "sfdsfsfs"
+        private const val XML = ("<!DOCTYPE html>\n"
+                + "    <html lang=\"en\">\n"
+                + "    <head>\n"
+                + "    \t<meta charset=\"UTF-8\">\n"
+                + "    \t<meta name=\"viewport\" content=\"initial-scale=1,maximum-scale=1, minimum-scale=1\">\n"
+                + "    \t<title>404</title>\n"
+                + "        <script type=\"text/javascript\" src=\"//res.ekwing.com/js/mb/bridge.js?v=1\"></script>\n"
+                + "    <style type=\"text/css\">\n"
+                + "    \thtml {\n"
+                + "        \tfont-family: Tahoma,Arial,Roboto,\"Droid Sans\",\"Helvetica Neue\",\"Droid Sans Fallback\",\"Heiti SC\",\"Microsoft "
+                + "Yahei\",sans-serif\n"
+                + "    \t}\n"
+                + "    \n"
+                + "    \thtml,body {\n"
+                + "    \t    width: 100%;\n"
+                + "    \t    height: 100%;\n"
+                + "    \t    overflow: hidden;\n"
+                + "    \t    font-size: 40px;\n"
+                + "    \t    margin:0;\n"
+                + "    \t    padding: 0;\n"
+                + "    \t    -webkit-touch-callout: none;\n"
+                + "    \t    -webkit-user-select: none;\n"
+                + "    \t    user-select:none;\n"
+                + "    \t}\n"
+                + "    \tp{\n"
+                + "    \t\tmargin:0;\n"
+                + "    \t\tpadding: 0;\n"
+                + "    \t}\n"
+                + "     \n"
+                + "    \t@font-face {\n"
+                + "    \t\tfont-family: 'iconfont';  project id 164748\n"
+                + "    \t  \tsrc: url('//at.alicdn.com/t/font_164748_n33hn9vh8d.eot');\n"
+                + "    \t  \tsrc: url('//at.alicdn.com/t/font_164748_n33hn9vh8d.eot?#iefix') format('embedded-opentype'),\n"
+                + "    \t  \turl('//at.alicdn.com/t/font_164748_n33hn9vh8d.woff') format('woff'),\n"
+                + "    \t  \turl('//at.alicdn.com/t/font_164748_n33hn9vh8d.ttf') format('truetype'),\n"
+                + "    \t  \turl('//at.alicdn.com/t/font_164748_n33hn9vh8d.svg#iconfont') format('svg');\n"
+                + "    \t}\n"
+                + "    \t.iconfont{\n"
+                + "    \t\tfont-family: 'iconfont';\n"
+                + "    \t\t\n"
+                + "    \t}\n"
+                + "    \t.top{\n"
+                + "    \t\twidth: 100%;\n"
+                + "    \t\theight: 1.2rem;\n"
+                + "    \t\t/*background-color: red;*/\n"
+                + "    \t\tline-height: 1.2rem;\n"
+                + "    \t}\n"
+                + "    \t.top-icon{\n"
+                + "    \t\t/*display: inline;*/\n"
+                + "    \t\twidth:0.533rem;\n"
+                + "    \t\tpadding-top: 0;\n"
+                + "    \t\tmargin:0;\n"
+                + "    \t\tfont-size: 0.533rem;\n"
+                + "    \t\tpadding-left: 0.267rem;\n"
+                + "    \t\tcolor: #333333;\n"
+                + "    \t\tline-height: 1.2rem;\n"
+                + "    \t} \n"
+                + "    \t.content{\n"
+                + "    \t\twidth: 100%;\n"
+                + "    \t\ttext-align: center;\n"
+                + "    \t\t\n"
+                + "    \t}\n"
+                + "    \t.content img{\n"
+                + "    \t\twidth: 8.533rem;\n"
+                + "    \t\theight: auto;\n"
+                + "    \t}\n"
+                + "    \t.content p{\n"
+                + "    \n"
+                + "    \t\tfont-size: 0.373rem;\n"
+                + "    \t\tcolor: #666666;\n"
+                + "    \t\tline-height: 0.56rem;\n"
+                + "    \t}\n"
+                + "    \t.foot{\n"
+                + "    \t\tposition: fixed;\n"
+                + "    \t\tleft: 0;\n"
+                + "    \t\tright: 0;\n"
+                + "    \t\tbottom: 0;\n"
+                + "    \t\t/*width: 10.0rem;*/\n"
+                + "    \t\tpadding-bottom: 0.8rem;\n"
+                + "    \t\ttext-align: center;\n"
+                + "    \t}\n"
+                + "    \t.foot p{\n"
+                + "    \t\tfont-size: 0.32rem;\n"
+                + "    \t\tcolor: #b0b0b0;\n"
+                + "    \t\tline-height: 0.48rem;\n"
+                + "    \t}\n"
+                + "    \t\n"
+                + "    </style>\n"
+                + "    </head>\n"
+                + "    <body>\n"
+                + "    \t <div class=\"top\">\n"
+                + "    \t\t<div class=\"iconfont top-icon\" id=\"goback\">&#xe6e5;</div>\n"
+                + "    \t</div> \n"
+                + "    \t<div class=\"content\">\n"
+                + "    \t\t<img src=\"/resource/static/images/mapi404.png\">\n"
+                + "    \t\t<p>这个页面失联了，攻城狮正在紧急搜索中...<br>不用担心，一切尽在掌握！</p>\n"
+                + "    \t</div>\n"
+                + "    \t<div class=\"foot\">\n"
+                + "    \t\t<p>\n"
+                + "    \t\t\t造成的原因可能如下：<br>可能网速过慢，或网络中断...<br>服务器过热导致网站可能出现故障...<br>这个页面太受欢迎，太多人在访问...\n"
+                + "    \t\t</p>\n"
+                + "    \t</div>\n"
+                + "    \t<script type=\"text/javascript\">\n"
+                + "    \t\tdocument.getElementById('goback').onclick=function(){\n"
+                + "    \t\t\tconsole.log('goback');\n"
+                + "                 bridgeClass.toLocalEvent(\"goback\");\n"
+                + "    \t\t\t//window.history.back();\n"
+                + "    \t\t}\n"
+                + "    \t</script>\n"
+                + "    </body>\n"
+                + "    </html>")
+
+
         fun getList(type:Int):MutableList<JsonItemEntity>?{
             when (type) {
                 DataJsonActivity.TYPE_SHORT -> return getShortList()
@@ -22,9 +141,35 @@ class DataUtils {
                 DataJsonActivity.TYPE_OBJECT -> return getObjectList()
                 DataJsonActivity.TYPE_ARRAY -> return getArrayList()
                 DataJsonActivity.TYPE_MAP -> return getMapList()
-                DataJsonActivity.TYPE_NO_JSON -> return null
+                DataJsonActivity.TYPE_NO_JSON -> return getIllegalList()
             }
            return null
+        }
+
+        private fun addIllegalLists(list: MutableList<JsonItemEntity>):MutableList<JsonItemEntity>{
+            if(list!=null){
+                val size = list.size
+                val dataName1 = "${size+1}、$XML_NAME"
+                val dataJson1 = XML
+
+                val dataName2 = "${size+2}、$TEXT_NAME"
+                val dataJson2 = TEXT
+
+                val dataName3 = "${size+3}、$TEXT_ILLEGAL_JSON_NAME"
+                val dataJson3 = TEXT_ILLEGAL_JSON
+
+                list.add(JsonItemEntity(dataName1,dataJson1))
+                list.add(JsonItemEntity(dataName2,dataJson2))
+                list.add(JsonItemEntity(dataName3,dataJson3))
+                return list
+            }
+            return mutableListOf<JsonItemEntity>()
+        }
+
+
+        private fun getIllegalList(): MutableList<JsonItemEntity> {
+            var list = mutableListOf<JsonItemEntity>()
+            return addIllegalLists(list)
         }
 
 
@@ -80,7 +225,7 @@ class DataUtils {
             list.add(JsonItemEntity(dataObjectName9, dataObjectJson9))
             list.add(JsonItemEntity(dataObjectName10, dataObjectJson10))
 
-            return list
+            return  addIllegalLists(list)
         }
 
         /**
@@ -150,7 +295,7 @@ class DataUtils {
             list.add(JsonItemEntity(dataArrayName13, dataArrayJson13))
             list.add(JsonItemEntity(dataArrayName14, dataArrayJson14))
 
-            return list
+            return addIllegalLists(list)
         }
 
         private fun getMapList(): MutableList<JsonItemEntity> {
@@ -196,7 +341,8 @@ class DataUtils {
             list.add(JsonItemEntity(dataMapName8, dataMapJson8))
             list.add(JsonItemEntity(dataMapName9, dataMapJson9))
             list.add(JsonItemEntity(dataMapName10, dataMapJson10))
-            return list
+
+            return  addIllegalLists(list)
         }
 
         private fun getStringList(): MutableList<JsonItemEntity> {
@@ -231,7 +377,6 @@ class DataUtils {
             val dataStringName10 = "10、要string 给的array，返回转义的字符串"
             val dataStringJson10 = "{\"id\":[{\"aa\":\"00\"}],\"name\":\"sssss\"}"
 
-
             list.add(JsonItemEntity(dataStringName1, dataStringJson1))
             list.add(JsonItemEntity(dataStringName2, dataStringJson2))
             list.add(JsonItemEntity(dataStringName3, dataStringJson3))
@@ -242,7 +387,8 @@ class DataUtils {
             list.add(JsonItemEntity(dataStringName8, dataStringJson8))
             list.add(JsonItemEntity(dataStringName9, dataStringJson9))
             list.add(JsonItemEntity(dataStringName10, dataStringJson10))
-            return list
+
+            return  addIllegalLists(list)
         }
 
 
@@ -278,7 +424,6 @@ class DataUtils {
             val dataDoubleName10 = "10、要double 给的array，解析返回0.0"
             val dataDoubleJson10 = "{\"id\":[{\"aa\":\"00\"}],\"name\":\"sssss\"}"
 
-
             list.add(JsonItemEntity(dataDoubleName1, dataDoubleJson1))
             list.add(JsonItemEntity(dataDoubleName2, dataDoubleJson2))
             list.add(JsonItemEntity(dataDoubleName3, dataDoubleJson3))
@@ -289,7 +434,8 @@ class DataUtils {
             list.add(JsonItemEntity(dataDoubleName8, dataDoubleJson8))
             list.add(JsonItemEntity(dataDoubleName9, dataDoubleJson9))
             list.add(JsonItemEntity(dataDoubleName10, dataDoubleJson10))
-            return list
+
+            return  addIllegalLists(list)
         }
 
         private fun getFloatList(): MutableList<JsonItemEntity> {
@@ -334,7 +480,8 @@ class DataUtils {
             list.add(JsonItemEntity(dataFloatName8, dataFloatJson8))
             list.add(JsonItemEntity(dataFloatName9, dataFloatJson9))
             list.add(JsonItemEntity(dataFloatName10, dataFloatJson10))
-            return list
+
+            return  addIllegalLists(list)
         }
 
         private fun getLongList(): MutableList<JsonItemEntity> {
@@ -379,7 +526,7 @@ class DataUtils {
             list.add(JsonItemEntity(dataLongName8, dataLongJson8))
             list.add(JsonItemEntity(dataLongName9, dataLongJson9))
             list.add(JsonItemEntity(dataLongName10, dataLongJson10))
-            return list
+            return  addIllegalLists(list)
         }
 
 
@@ -422,6 +569,7 @@ class DataUtils {
             val dataIntName12 = "12要int 给的array，解析返回0"
             val dataIntJson12 = "{\"id\":[{\"aa\":\"00\"}],\"name\":\"sssss\"}"
 
+
             list.add(JsonItemEntity(dataIntName1, dataIntJson1))
             list.add(JsonItemEntity(dataIntName2, dataIntJson2))
             list.add(JsonItemEntity(dataIntName3, dataIntJson3))
@@ -434,7 +582,7 @@ class DataUtils {
             list.add(JsonItemEntity(dataIntName10, dataIntJson10))
             list.add(JsonItemEntity(dataIntName11, dataIntJson11))
             list.add(JsonItemEntity(dataIntName12, dataIntJson12))
-            return list
+            return  addIllegalLists(list)
         }
 
         private fun getShortList(): MutableList<JsonItemEntity> {
@@ -487,7 +635,8 @@ class DataUtils {
             list.add(JsonItemEntity(dataShortName10, dataShortJson10))
             list.add(JsonItemEntity(dataShortName11, dataShortJson11))
             list.add(JsonItemEntity(dataShortName12, dataShortJson12))
-            return list
+
+            return addIllegalLists(list)
         }
 
 

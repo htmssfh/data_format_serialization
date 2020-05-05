@@ -126,6 +126,12 @@ class DataParserDetailActivity:AppCompatActivity(), View.OnClickListener {
                 mViewBinding.tvResult.text = CommonJsonBuilder.toJson(mapE)+"\n\n耗时:$time 毫秒"
                 mViewBinding.tvLine.visibility = View.VISIBLE
             }
+            DataJsonActivity.TYPE_NO_JSON -> {
+                var illegalEntity = CommonJsonBuilder.toObject(mJson, IllegalDataEntity::class.java)
+                val time = System.currentTimeMillis() -start
+                mViewBinding.tvResult.text = CommonJsonBuilder.toJson(illegalEntity)+"\n\n耗时:$time 毫秒"
+                mViewBinding.tvLine.visibility = View.VISIBLE
+            }
         }
     }
 }
