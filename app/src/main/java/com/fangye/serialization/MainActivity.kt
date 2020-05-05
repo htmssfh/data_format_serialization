@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 DataJsonActivity.startIntent(this,DataJsonActivity.TYPE_MAP)
             }
             else -> {
-
+                DataJsonActivity.startIntent(this,DataJsonActivity.TYPE_NO_JSON)
             }
 
         }

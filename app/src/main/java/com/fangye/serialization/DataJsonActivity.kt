@@ -25,6 +25,7 @@ import com.fangye.serialization.utils.DataUtils
 class DataJsonActivity : AppCompatActivity(), OnItemChildClickListener {
 
     companion object{
+
         const val TYPE_SHORT= 1
         const val TYPE_INT= 2
         const val TYPE_LONG= 3
@@ -34,6 +35,7 @@ class DataJsonActivity : AppCompatActivity(), OnItemChildClickListener {
         const val TYPE_OBJECT= 7
         const val TYPE_ARRAY= 8
         const val TYPE_MAP= 9
+        const val TYPE_NO_JSON =0
         private const val TYPE_NAME = "type"
 
         fun startIntent(context: Context,type:Int){

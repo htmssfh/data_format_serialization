@@ -108,9 +108,24 @@ class DataParserDetailActivity:AppCompatActivity(), View.OnClickListener {
                 mViewBinding.tvResult.text = CommonJsonBuilder.toJson(stringTest)+"\n\n耗时:$time 毫秒"
                 mViewBinding.tvLine.visibility = View.VISIBLE
             }
-            DataJsonActivity.TYPE_OBJECT -> {}
-            DataJsonActivity.TYPE_ARRAY -> {}
-            DataJsonActivity.TYPE_MAP -> {}
+            DataJsonActivity.TYPE_OBJECT -> {
+                var objectEntity = CommonJsonBuilder.toObject(mJson, ObjectEntity::class.java)
+                val time = System.currentTimeMillis() -start
+                mViewBinding.tvResult.text = CommonJsonBuilder.toJson(objectEntity)+"\n\n耗时:$time 毫秒"
+                mViewBinding.tvLine.visibility = View.VISIBLE
+            }
+            DataJsonActivity.TYPE_ARRAY -> {
+                var arrayE = CommonJsonBuilder.toObjectArray(mJson, ArrayEntity::class.java)
+                val time = System.currentTimeMillis() -start
+                mViewBinding.tvResult.text = CommonJsonBuilder.toJson(arrayE)+"\n\n耗时:$time 毫秒"
+                mViewBinding.tvLine.visibility = View.VISIBLE
+            }
+            DataJsonActivity.TYPE_MAP -> {
+                var mapE = CommonJsonBuilder.toObject(mJson, MapEntity::class.java)
+                val time = System.currentTimeMillis() -start
+                mViewBinding.tvResult.text = CommonJsonBuilder.toJson(mapE)+"\n\n耗时:$time 毫秒"
+                mViewBinding.tvLine.visibility = View.VISIBLE
+            }
         }
     }
 }

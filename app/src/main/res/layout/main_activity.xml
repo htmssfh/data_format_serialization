@@ -95,6 +95,16 @@
             android:padding="10dp"
             android:text="要map，服务端返回其它格式的各种情况" />
 
+        <Button
+            android:textColor="#333333"
+            android:id="@+id/btn_default_other_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:padding="10dp"
+            android:text="传入非标准json格式、传入html的格式或其它非json格式" />
+
+
     </LinearLayout>
 
 </ScrollView>
