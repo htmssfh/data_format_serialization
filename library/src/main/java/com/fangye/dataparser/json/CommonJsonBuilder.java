@@ -57,12 +57,12 @@ import java.util.Map;
  */
 public class CommonJsonBuilder {
 
+
     private static Gson create() {
         return CommonJsonBuilder.GsonHolder.gson;
     }
 
     private static class GsonHolder {
-
         private static Gson gson = newGson();
     }
 
@@ -81,15 +81,15 @@ public class CommonJsonBuilder {
             //注册String类型处理器
             gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(String.class, GsonUtils.stringTypeAdapter()));
             //注册int.class, Integer.class处理器
-            gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(int.class, Integer.class, GsonUtils.longAdapter(0)));
+            gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(int.class, Integer.class, GsonUtils.longAdapter(GsonUtils.OBJECT_TYPE_INT)));
             //注册short.class, Short.class处理器
-            gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(short.class, Short.class, GsonUtils.longAdapter(1)));
+            gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(short.class, Short.class, GsonUtils.longAdapter(GsonUtils.OBJECT_TYPE_SHORT)));
             //注册long.class, Long.class处理器
-            gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(long.class, Long.class, GsonUtils.longAdapter(2)));
+            gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(long.class, Long.class, GsonUtils.longAdapter(GsonUtils.OBJECT_TYPE_LONG)));
             //注册double.class, Double.class处理器
-            gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(double.class, Double.class, GsonUtils.longAdapter(3)));
+            gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(double.class, Double.class, GsonUtils.longAdapter(GsonUtils.OBJECT_TYPE_DOUBLE)));
             //注册float.class, Float.class处理器
-            gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(float.class, Float.class, GsonUtils.longAdapter(4)));
+            gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(float.class, Float.class, GsonUtils.longAdapter(GsonUtils.OBJECT_TYPE_FLOAT)));
             //注册反射对象的处理器
             gsonBuilder.registerTypeAdapterFactory(
                     new ReflectiveTypeAdapterFactory(new ConstructorConstructor(val), FieldNamingPolicy.IDENTITY, Excluder.DEFAULT));

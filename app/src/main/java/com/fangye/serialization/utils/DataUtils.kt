@@ -342,8 +342,7 @@ class DataUtils {
             val dataLongName1 = "1、要long ，给的为long/int/short ,数据正常，解析正常"
             val dataLongJson1 = "{\"id\":122222221222,\"name\":\"sssss\"}"
 
-            //todo
-            val dataLongName2 = "2、要long ，给的float或者double ,会崩溃"
+            val dataLongName2 = "2、要long ，给的float或者double ,解析返回0，当然也可让程序崩溃"
             val dataLongJson2 = "{\"id\":1.6,\"name\":\"sssss\"}"
 
             val dataLongName3 = "3、要long ,给的boolean ,解析返回0"
@@ -390,13 +389,11 @@ class DataUtils {
             val dataIntName1 = "1、要int ，给的为int/short ,数据正常，解析正常"
             val dataIntJson1 = "{\"id\":100,\"name\":\"sssss\"}"
 
-            //todo
-            val dataIntName2 = "2、要int ，给的float或者double ,会崩溃"
+            val dataIntName2 = "2、要int ，给的float或者double ,解析返回0，，当然也可以让程序崩溃"
             val dataIntJson2 = "{\"id\":1.6,\"name\":\"sssss\"}"
 
-            //todo
-            val dataIntName3 = "3、要int ，返回long，会崩溃，属于正常现象"
-            val dataIntJson3 = "{\"id\":21474836477,\"name\":\"sssss\"}"
+            val dataIntName3 = "3、要int ，返回long，超过int的取值范围，解析返回0，当然也可以让程序崩溃"
+            val dataIntJson3 = "{\"id\":21474836475,\"name\":\"sssss\"}"
 
             val dataIntName4 = "4、要int ,给的boolean ,解析返回0"
             val dataIntJson4 = "{\"id\":true,\"name\":\"sssss\"}"
@@ -413,8 +410,7 @@ class DataUtils {
             val dataIntName8 = "8、要int 给的字符串int/short ，可正常解析"
             val dataIntJson8 = "{\"id\":\"16\",\"name\":\"sssss\"}"
 
-            //todo ,最好是崩溃
-            val dataIntName9 = "9、要int ，给的字符串long，解析返回0"
+            val dataIntName9 = "9、要int ，给的字符串long，解析返回0，当然也可让程序崩溃"
             val dataIntJson9 = "{\"id\":\"1623332234234242\",\"name\":\"sssss\"}"
 
             val dataIntName10 = "10、要int 给的字符串float/double ,解析返回0"
@@ -446,13 +442,11 @@ class DataUtils {
             val dataShortName1 = "1、要short ，给的为short ,数据正常，解析正常"
             val dataShortJson1 = "{\"id\":1,\"name\":\"sssss\"}"
 
-            //todo
-            val dataShortName2 = "2、要short ，给的float或者double ,会崩溃"
-            val dataShortJson2 = "{\"id\":1.6,\"name\":\"sssss\"}"
+            val dataShortName2 = "2、要short ，给的float或者double ,解析返回 (short)0，当然也可让程序崩溃"
+            val dataShortJson2 = "{\"id\":1232.6,\"name\":\"sssss\"}"
 
-            //todo
-            val dataShortName3 = "3、要short ，short（-32768 32767）给的括号之外会的值（int/long），解析返回数据有问题"
-            val dataShortJson3 = "{\"id\":3278845,\"name\":\"sssss\"}"
+            val dataShortName3 = "3、要short ，short（-32768 32767）给的括号之外会的值（int/long），解析返回0 ，当然也可让程序崩溃"
+            val dataShortJson3 = "{\"id\":-32768,\"name\":\"sssss\"}"
 
             val dataShortName4 = "4、要short ,给的boolean ,解析返回0"
             val dataShortJson4 = "{\"id\":true,\"name\":\"sssss\"}"
@@ -469,8 +463,7 @@ class DataUtils {
             val dataShortName8 = "8、要short 给的字符串short ,没有问题，可正常解析"
             val dataShortJson8 = "{\"id\":\"16\",\"name\":\"sssss\"}"
 
-            //todo
-            val dataShortName9 = "9、要short 给的字符串short ,超过short取值范围（-32768 32767）, 返回数据有问题"
+            val dataShortName9 = "9、要short 给的字符串short ,超过short取值范围（-32768 32767）, 解析返回0，当然也可让程序崩溃"
             val dataShortJson9 = "{\"id\":\"327671\",\"name\":\"sssss\"}"
 
             val dataShortName10 = "10、要short 给的字符串float/double ,解析返回0"

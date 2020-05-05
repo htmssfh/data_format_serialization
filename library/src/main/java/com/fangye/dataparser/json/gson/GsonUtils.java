@@ -26,6 +26,28 @@ import java.util.Collection;
  */
 public class GsonUtils {
 
+    //short
+    public static final int OBJECT_TYPE_SHORT = 0;
+    //int
+    public static final int OBJECT_TYPE_INT = 1;
+    //long
+    public static final int OBJECT_TYPE_LONG = 2;
+    //double
+    public static final int OBJECT_TYPE_DOUBLE =3;
+    //float
+    public static final int OBJECT_TYPE_FLOAT = 4;
+
+    //short最小值
+    private static final long SHORT_MIN = -32768L;
+    //short最大值
+    private static final long SHORT_MAX = 32767L;
+
+    //int 最小值
+    private static final long INT_MIN = -2147483648L;
+    //int 最大值
+    private static final long INT_MAX = 2147483647L;
+
+
     /**
      * 解析jsonArray
      *
@@ -189,19 +211,19 @@ public class GsonUtils {
                 Log.i("MainActivity","=in-----7---=====");
                 if (isNot) {
                     switch (type) {
-                        case 0:
+                        case OBJECT_TYPE_INT:
                             Log.i("MainActivity","=in-----8----=====");
                             return 0;
-                        case 1:
+                        case OBJECT_TYPE_SHORT:
                             Log.i("MainActivity","=in-------9-=====");
                             return (short) 0;
-                        case 2:
+                        case OBJECT_TYPE_LONG:
                             Log.i("MainActivity","=in-----10---=====");
-                            return 0;
-                        case 3:
+                            return (long)0;
+                        case OBJECT_TYPE_DOUBLE:
                             Log.i("MainActivity","=in------11--=====");
                             return (double) 0;
-                        case 4:
+                        case OBJECT_TYPE_FLOAT:
                             Log.i("MainActivity","=in-----12---=====");
                             return (float) 0;
                         default:
@@ -212,34 +234,87 @@ public class GsonUtils {
                 Log.i("MainActivity","=in------14--=====");
                 try {
                     switch (type) {
-                        case 0:
+                        case OBJECT_TYPE_SHORT:
+                            //short
+                            Log.i("MainActivity","=in--------18====="+in.peek());
+                            if (in.peek() == JsonToken.STRING) {
+                                //暂不做处理
+                                Log.i("MainActivity","=in---19-----=====");
+                                return toShort(in.nextString()).shortValue();
+                            }else if(in.peek() == JsonToken.NUMBER){
+                                Log.i("MainActivity","=in---19-1----=====");
+                                //数字类型
+
+                                // 判断是不是浮点类型，如果是则解析 返回0
+                                String numberStr = in.nextString();
+                                if (judgeDouble(numberStr)) {
+                                    Log.i("MainActivity","=in---19-2----=====");
+                                    return (short) 0;
+                                }
+
+                                Log.i("MainActivity","=in---19-3----=====");
+                                // 判断取值范围是否正确，如果不正确，则解析返回0
+                                Long aLong = toLong(numberStr);
+                                Log.i("MainActivity","=in---19-4----====="+aLong.longValue());
+                                if(aLong.longValue()>=SHORT_MAX||aLong<=SHORT_MIN){
+                                    Log.i("MainActivity","=in---19-5----=====");
+                                    return (short)0;
+                                }
+
+                            }
+                            Log.i("MainActivity","=in-------20-=====");
+
+                            return (short) in.nextInt();
+                        case OBJECT_TYPE_INT:
+                            //int
                             Log.i("MainActivity","=in------15--=====");
                             if (in.peek() == JsonToken.STRING) {
                                 Log.i("MainActivity","=in----16----=====");
                                 //暂不做处理
                                 return toInt(in.nextString());
+                            }else if(in.peek() == JsonToken.NUMBER){
+                                //数字类型
+
+                                // 判断是不是浮点类型，如果是则解析 返回0
+                                String numberStr = in.nextString();
+                                if (judgeDouble(numberStr)) {
+                                    Log.i("MainActivity","=in---16-1----=====");
+                                    return 0;
+                                }
+
+                                // 判断取值范围是否正确，如果不正确，则解析返回0
+                                Long aLong = toLong(numberStr);
+                                if(aLong.longValue()>=INT_MAX||aLong<=INT_MIN){
+                                    return 0;
+                                }
+
                             }
 
                             Log.i("MainActivity","=in------17--=====");
                             return in.nextInt();
-                        case 1:
-                            Log.i("MainActivity","=in--------18=====");
-                            if (in.peek() == JsonToken.STRING) {
-                                //暂不做处理
-                                Log.i("MainActivity","=in---19-----=====");
-                                return toInt(in.nextString()).shortValue();
-                            }
-                            Log.i("MainActivity","=in-------20-=====");
-                            return (short) in.nextInt();
-                        case 2:
+
+                        case OBJECT_TYPE_LONG:
+                            //long
                             Log.i("MainActivity","=in-----21---=====");
                             if (in.peek() == JsonToken.STRING) {
                                 //暂不做处理
                                 Log.i("MainActivity","=in----22----=====");
                                 return toLong(in.nextString()).longValue();
+                            }else if(in.peek() == JsonToken.NUMBER){
+                                //数字类型
+
+                                // 判断是不是浮点类型，如果是则解析 返回0
+                                String numberStr = in.nextString();
+                                if (judgeDouble(numberStr)) {
+                                    Log.i("MainActivity","=in---22-1----=====");
+                                    return (long) 0;
+                                }
+
+                                // 判断取值范围是否正确，很大，这里不需要再判断了
                             }
                             return in.nextLong();
-                        case 3:
+                        case OBJECT_TYPE_DOUBLE:
+                            //double
                             Log.i("MainActivity","=in-----23---=====");
                             if (in.peek() == JsonToken.STRING) {
                                 //暂不做处理
@@ -248,7 +323,8 @@ public class GsonUtils {
                             }
                             Log.i("MainActivity","=in-------25-=====");
                             return in.nextDouble();
-                        case 4:
+                        case OBJECT_TYPE_FLOAT:
+                            //float
                             Log.i("MainActivity","=in------26--=====");
                             if (in.peek() == JsonToken.STRING) {
                                 //暂不做处理
@@ -275,6 +351,18 @@ public class GsonUtils {
                 out.value(value);
             }
         };
+    }
+
+    private static boolean judgeDouble(String number){
+        Log.i("MainActivity","=in---19-00----====="+number);
+        if(number==null||number.isEmpty()){
+            return false;
+        }
+        if (number.contains(".") || number.contains("e")
+                || number.contains("E")){
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -335,6 +423,24 @@ public class GsonUtils {
 
         try {
             result = Integer.valueOf(data);
+        } catch (Exception e) {
+            //
+        }
+
+        return result;
+    }
+
+    /**
+     * 整形转换
+     *
+     * @param data 输入
+     * @return Integer
+     */
+    public static Short toShort(String data) {
+        Short result = 0;
+        Log.e("MainActivity","data===========:"+data);
+        try {
+            result = Short.valueOf(data);
         } catch (Exception e) {
             //
         }
