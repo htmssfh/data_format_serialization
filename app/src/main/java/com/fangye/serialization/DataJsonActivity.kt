@@ -53,9 +53,7 @@ class DataJsonActivity : AppCompatActivity(), OnItemChildClickListener {
         mViewBinding = ActivityListDataBinding.inflate(LayoutInflater.from(this))
         setContentView(mViewBinding.root)
         mType = intent.getIntExtra(TYPE_NAME, TYPE_INT)
-        Log.e("aaaa","==============mType:$mType")
         list = DataUtils.getList(mType)
-        Log.e("aaaa","==============mType:${CommonJsonBuilder.toJson(list)}")
         val mAdapter = ListItemAdapter(R.layout.item_data,list)
         mViewBinding.rvList.layoutManager = LinearLayoutManager(this)
         mViewBinding.rvList.adapter = mAdapter

@@ -218,6 +218,7 @@ public class GsonUtils {
                             return 0;
                     }
                 }
+
                 try {
                     switch (type) {
                         case OBJECT_TYPE_SHORT:
@@ -239,7 +240,7 @@ public class GsonUtils {
                                 if(aLong.longValue()>=SHORT_MAX||aLong<=SHORT_MIN){
                                     return (short)0;
                                 }
-
+                                return (short)aLong.longValue();
                             }
 
                             return (short) in.nextInt();
@@ -263,6 +264,8 @@ public class GsonUtils {
                                     return 0;
                                 }
 
+                                return (int)aLong.longValue();
+
                             }
 
                             return in.nextInt();
@@ -282,6 +285,9 @@ public class GsonUtils {
                                 }
 
                                 // 判断取值范围是否正确，很大，这里不需要再判断了
+                                Long aLong = toLong(numberStr);
+
+                                return aLong.longValue();
                             }
                             return in.nextLong();
                         case OBJECT_TYPE_DOUBLE:
@@ -401,7 +407,6 @@ public class GsonUtils {
      */
     public static Short toShort(String data) {
         Short result = 0;
-        Log.e("MainActivity","data===========:"+data);
         try {
             result = Short.valueOf(data);
         } catch (Exception e) {
@@ -419,7 +424,6 @@ public class GsonUtils {
      */
     public static Integer toInt(String data) {
         Integer result = 0;
-        Log.e("MainActivity","data===========:"+data);
         try {
             result = Integer.valueOf(data);
         } catch (Exception e) {
