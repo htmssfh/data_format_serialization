@@ -105,6 +105,7 @@ public final class MapTypeAdapterFactory implements TypeAdapterFactory {
 
     @Override public Map<K, V> read(JsonReader in) throws IOException {
       JsonToken peek = in.peek();
+
       if (peek == JsonToken.NULL) {
         in.nextNull();
         return constructor.construct();
@@ -123,21 +124,22 @@ public final class MapTypeAdapterFactory implements TypeAdapterFactory {
         }
         return constructor.construct();
       }
+
       if (in.peek() == JsonToken.NAME) {
         in.nextName();
         return constructor.construct();
       }
-      
+
       if (in.peek() == JsonToken.BOOLEAN) {
         in.nextBoolean();
         return constructor.construct();
       }
 
-      // TODO: 2020/3/30  ,源码单独对array的处理，情况不明
-      if (in.peek() == JsonToken.BEGIN_ARRAY) {
-        GsonUtils.readArray(in);
-        return constructor.construct();
-      }
+//      if (in.peek() == JsonToken.BEGIN_ARRAY) {
+//        GsonUtils.readArray(in);
+//        LogTagsUtils.i("==7=in.peek:" + peek);
+//        return constructor.construct();
+//      }
 
       Map<K, V> map = constructor.construct();
       if (peek == JsonToken.BEGIN_ARRAY) {
@@ -159,6 +161,9 @@ public final class MapTypeAdapterFactory implements TypeAdapterFactory {
           JsonReaderInternalAccess.INSTANCE.promoteNameToValue(in);
           K key = keyTypeAdapter.read(in);
           V value = valueTypeAdapter.read(in);
+//          if(value!=null && value.toString().startsWith("{")){
+//
+//          }
           V replaced = map.put(key, value);
           if (replaced != null) {
             throw new JsonSyntaxException("duplicate key: " + key);

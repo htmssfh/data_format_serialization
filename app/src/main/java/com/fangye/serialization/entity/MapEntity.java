@@ -144,6 +144,14 @@ public class MapEntity {
         this.data9 = data9;
     }
 
+    public Map<String, String> getData10() {
+        return data10;
+    }
+
+    public void setData10(Map<String, String> data10) {
+        this.data10 = data10;
+    }
+
     public static class Data1Bean {
         /**
          * id : 234
