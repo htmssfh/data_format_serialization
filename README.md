@@ -61,15 +61,29 @@
 
 ## 二.更新日志
 
-### 0.0.1
+### 1.0.0
 1、初次发布远程依赖版本，支持的功能如上描述
 
 
 
 
 ## 三、使用
+
+### 3.1、将JitPack存储库添加到您的构建文件中(项目根目录下build.gradle文件)
 ```
-implementation 'com.fanye.library:dataparser:0.0.1'
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+
+### 3.2、添加依赖
+```
+dependencies {
+    implementation 'com.github.fangyeren:data_format_serialization:1.0.0'
+}
 ```
 
 
@@ -124,5 +138,3 @@ Log.e("dataparse","arrayCc.toString()===111===="+CommonJsonBuilder.toJson(arrayC
 >
 >
 
-
-## 五、参考文章
