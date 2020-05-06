@@ -47,13 +47,22 @@ import java.util.Map;
  * 传入非标准json格式、传入html的格式或其它非json格式，不会报异常，会直接返回[]
  * <p>
  * 4)要int.class, Integer.class,short.class, Short.class,long.class, Long.class,double.class, Double.class,
- * float.class, Float.class ,后端给的非数字类型返回0
+ * float.class, Float.class 等情况
+ * 4.1 后端给的非数字类型，如空字符串、字符串、boolean、array、object 等，解析返回0;
+ * 4.2给的数据 超过 实际类型 的取值范围，如定义int ，值不能超过 2147483647 ，超过解析返回0 ，所以定义类型时一定考虑数据的取值范围;
+ * 4.3要int/short/long，服务端给的float/double ，解析返回0，所以服务端经的数据可能为浮点类型时，最好使用float或者double
  * <p>
  * 5)要String
  * 4.1，如果后端给了[]、{},则返回""
  * 4.2，如果后端给的[]或者{}里面有数据，会解析返回实际的字符串，返回的字符串会被转义
  * 4.3，如果后端给了基本数据类型或者boolean类型，则会将其转成String类型
  * 4.4，其它给什么类型，解析返回对应的字符串，如服务端给空字符串，解析返回为空字符串
+ * <p>
+ * 6)目前已知的三种崩溃情况
+ * 6.1，传入xml  CommonJsonBuilder
+ * 6.2，传入一个字符串
+ * 6.3，传入一个错误的json
+ *
  */
 public class CommonJsonBuilder {
 
