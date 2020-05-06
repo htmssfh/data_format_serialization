@@ -1,6 +1,7 @@
 apply {
     from "${project.rootDir.path}/library.gradle"
 }
+apply plugin: 'com.github.dcendents.android-maven'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -8,3 +9,4 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
 }
 
+group='com.fanyeren.library'
