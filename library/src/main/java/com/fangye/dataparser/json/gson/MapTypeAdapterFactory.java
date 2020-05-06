@@ -16,6 +16,7 @@
 
 package com.fangye.dataparser.json.gson;
 
+
 import com.fangye.dataparser.json.CommonJsonBuilder;
 import com.fangye.dataparser.utils.LogTagsUtils;
 import com.google.gson.Gson;
@@ -105,7 +106,6 @@ public final class MapTypeAdapterFactory implements TypeAdapterFactory {
 
     @Override public Map<K, V> read(JsonReader in) throws IOException {
       JsonToken peek = in.peek();
-
       if (peek == JsonToken.NULL) {
         in.nextNull();
         return constructor.construct();
@@ -135,11 +135,11 @@ public final class MapTypeAdapterFactory implements TypeAdapterFactory {
         return constructor.construct();
       }
 
-//      if (in.peek() == JsonToken.BEGIN_ARRAY) {
-//        GsonUtils.readArray(in);
-//        LogTagsUtils.i("==7=in.peek:" + peek);
-//        return constructor.construct();
-//      }
+      if (in.peek() == JsonToken.BEGIN_ARRAY) {
+        GsonUtils.readArray(in);
+        LogTagsUtils.i("==7=in.peek:" + peek);
+        return constructor.construct();
+      }
 
       Map<K, V> map = constructor.construct();
       if (peek == JsonToken.BEGIN_ARRAY) {

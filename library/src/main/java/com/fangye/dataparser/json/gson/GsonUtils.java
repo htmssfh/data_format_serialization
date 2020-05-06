@@ -400,10 +400,10 @@ public class GsonUtils {
     }
 
     /**
-     * 整形转换
+     * Short转换
      *
      * @param data 输入
-     * @return Integer
+     * @return Short
      */
     public static Short toShort(String data) {
         Short result = 0;
