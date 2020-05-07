@@ -53,15 +53,17 @@ import java.util.Map;
  * 4.3要int/short/long，服务端给的float/double ，解析返回0，所以服务端经的数据可能为浮点类型时，最好使用float或者double
  * <p>
  * 5)要String
- * 4.1，如果后端给了[]、{},则返回""
- * 4.2，如果后端给的[]或者{}里面有数据，会解析返回实际的字符串，返回的字符串会被转义
- * 4.3，如果后端给了基本数据类型或者boolean类型，则会将其转成String类型
- * 4.4，其它给什么类型，解析返回对应的字符串，如服务端给空字符串，解析返回为空字符串
+ * 5.1，如果后端给了[]、{},则返回""
+ * 5.2，如果后端给的[]或者{}里面有数据，会解析返回实际的字符串，返回的字符串会被转义
+ * 5.3，如果后端给了基本数据类型或者boolean类型，则会将其转成String类型
+ * 5.4，其它给什么类型，解析返回对应的字符串，如服务端给空字符串，解析返回为空字符串
  * <p>
- * 6)目前已知的三种崩溃情况
- * 6.1，传入xml  CommonJsonBuilder
- * 6.2，传入一个字符串
- * 6.3，传入一个错误的json
+ * 6)、要boolean,服务端给byte/int/short/long/float/double/array/object/字符串，解析返回false
+ * <p>
+ * 7)目前已知的三种崩溃情况
+ * 7.1，传入xml  CommonJsonBuilder
+ * 7.2，传入一个字符串
+ * 7.3，传入一个错误的json
  *
  */
 public class CommonJsonBuilder {
@@ -103,6 +105,8 @@ public class CommonJsonBuilder {
             gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(double.class, Double.class, GsonUtils.longAdapter(GsonUtils.OBJECT_TYPE_DOUBLE)));
             //注册float.class, Float.class处理器
             gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(float.class, Float.class, GsonUtils.longAdapter(GsonUtils.OBJECT_TYPE_FLOAT)));
+            //注册boolean.class,Boolean.class处理器
+            gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(boolean.class, Boolean.class, GsonUtils.booleanTypeAdapter()));
             //注册反射对象的处理器
             gsonBuilder.registerTypeAdapterFactory(
                     new ReflectiveTypeAdapterFactory(new ConstructorConstructor(val), FieldNamingPolicy.IDENTITY, Excluder.DEFAULT));

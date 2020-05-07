@@ -250,6 +250,65 @@ public class GsonUtils {
     }
 
     /**
+     * boolean适配器
+     * @return
+     */
+    public static TypeAdapter<Boolean> booleanTypeAdapter() {
+        return new TypeAdapter<Boolean>() {
+
+
+            @Override
+            public Boolean read(JsonReader in) throws IOException {
+                JsonToken peek = in.peek();
+
+                // 增加判断是错误的NULL的类型,如果为NULL ，则反系列化为false
+                if (peek == JsonToken.NULL) {
+                    in.nextNull();
+                    return false;
+                }
+
+                //增加判断是错误的name的类型（应该是boolean）,移动in的下标到结束，移动下标的代码在下方
+                if (in.peek() == JsonToken.NAME) {
+                    in.nextName();
+                    return false;
+                }
+
+                //增加判断是错误的NUMBER的类型（应该是boolean）,移动in的下标到结束，移动下标的代码在下方
+                if(in.peek() == JsonToken.NUMBER){
+                    in.nextDouble();
+                    return false;
+                }
+
+                //增加判断是错误的STRING的类型（应该是boolean）,移动in的下标到结束，移动下标的代码在下方
+                if(in.peek() == JsonToken.STRING){
+                    return Boolean.valueOf(in.nextString());
+                    //return Boolean.parseBoolean(in.nextString());
+                }
+                //增加判断是错误的object的类型（应该是boolean）,移动in的下标到结束，移动下标的代码在下方
+                if (in.peek() == JsonToken.BEGIN_OBJECT) {
+                    readObject(in);
+                    return false;
+                }
+
+                //增加判断是错误的array的类型（应该是boolean）,移动in的下标到结束，移动下标的代码在下方
+                if (in.peek() == JsonToken.BEGIN_ARRAY) {
+                    readArray(in);
+                    return false;
+                }
+
+                return in.nextBoolean();
+            }
+
+            @Override
+            public void write(JsonWriter out, Boolean value) throws IOException {
+                out.value(value);
+            }
+
+        };
+    }
+
+
+    /**
      * 处理字符的适配器
      */
     public static TypeAdapter<String> stringTypeAdapter() {
@@ -287,7 +346,8 @@ public class GsonUtils {
                         return "";
                     }
                     //JSONObject包装的数据会有转义，此操作为 去转义
-                    return StringEscapeUtils.unescapeJson(j.toString());
+                    return j.toString();
+//                    return StringEscapeUtils.unescapeJson(j.toString());
                 }
 
                 //增加判断是错误的ARRAY的类型
@@ -297,7 +357,8 @@ public class GsonUtils {
                     if(j==null||j.length()==0){
                         return "";
                     }
-                    return StringEscapeUtils.unescapeJson(j.toString());
+                    return j.toString();
+//                    return StringEscapeUtils.unescapeJson(j.toString());
                 }
                 return in.nextString();
 //                return StringEscapeUtils.unescapeJson(in.nextString());
