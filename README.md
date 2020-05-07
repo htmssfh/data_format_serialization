@@ -47,11 +47,15 @@
 
  5. 要map对象 ,后端给了[]、空字符串、字符串、boolean、数字，均返回实例对象{} ,即空map集合
 
- 6. 目前已知的三种崩溃情况
+ 6. 要boolean,服务端给byte/int/short/long/float/double/array/object/字符串，解析返回false
 
-    6.1，传入xml  CommonJsonBuilder
-    6.2，传入一个字符串
-    6.3，传入一个错误的json
+ 7. 目前已知的三种崩溃情况
+
+    7.1，传入xml  CommonJsonBuilder
+
+    7.2，传入一个字符串
+
+    7.3，传入一个错误的json
 
 
  > Gson-2.8.5
@@ -60,6 +64,10 @@
 正开发中。。。
 
 ## 二.更新日志
+
+### 1.0.1
+1、支持boolean和byte的自定义适配
+2、JsonObject和JsonArray 转义问题处理
 
 ### 1.0.0
 1、初次发布远程依赖版本，支持的功能如上描述
@@ -82,7 +90,7 @@ allprojects {
 ### 3.2、添加依赖
 ```
 dependencies {
-    implementation 'com.github.fangyeren:data_format_serialization:1.0.0'
+    implementation 'com.github.fangyeren:data_format_serialization:1.0.1'
 }
 ```
 
