@@ -104,9 +104,9 @@ public class CommonJsonBuilder {
                     new ReflectiveTypeAdapterFactory(new ConstructorConstructor(val), FieldNamingPolicy.IDENTITY, Excluder.DEFAULT));
             //注册集合的处理器
             gsonBuilder.registerTypeAdapterFactory(new CollectionTypeAdapterFactory(new ConstructorConstructor(val)));
-            //            //支持Map的key为复杂对象的形式 ，如：Map<Point, String> map = new LinkedHashMap<Point, String>();
-            //            gsonBuilder.enableComplexMapKeySerialization();
-            //
+            //支持Map的key为复杂对象的形式 ，如：Map<Point, String> map = new LinkedHashMap<Point, String>();
+            gsonBuilder.enableComplexMapKeySerialization();
+            //注册Map集合的处理器
             gsonBuilder.registerTypeAdapterFactory(new MapTypeAdapterFactory(new ConstructorConstructor(val), true));
             //对json结果格式化.
             gsonBuilder.setPrettyPrinting();

@@ -130,21 +130,23 @@ public class CollectionTypeAdapterFactory implements TypeAdapterFactory {
 
         @Override
         public Collection<E> read(JsonReader in) throws IOException {
+            //增加判断是错误NULL的类型（应该是ARRAY）,移动in的下标到结束，移动下标的代码在下方
             if (in.peek() == JsonToken.NULL) {
                 in.nextNull();
                 return constructor.construct();
             }
-            //增加判断是错误OBJECT的类型（应该是object）,移动in的下标到结束，移动下标的代码在下方
+            //增加判断是错误OBJECT的类型（应该是ARRAY）,移动in的下标到结束，移动下标的代码在下方
             if (in.peek() == JsonToken.BEGIN_OBJECT) {
                 GsonUtils.readObject(in);
                 return constructor.construct();
             }
-            //增加判断是错误的NUMBER的类型（应该是object）,移动in的下标到结束，移动下标的代码在下方
+            //增加判断是错误的NUMBER的类型（应该是ARRAY）,移动in的下标到结束，移动下标的代码在下方
             if (in.peek() == JsonToken.NUMBER) {
                 in.nextDouble();
                 return constructor.construct();
             }
-            //增加判断是错误的String的类型（应该是object）,移动in的下标到结束，移动下标的代码在下方
+            //增加判断是错误的String的类型（应该是ARRAY）,移动in的下标到结束，移动下标的代码在下方
+            //如果给的ARRAY是一个转义的字符串，此处会单独处理解析返回
             if (in.peek() == JsonToken.STRING) {
                 String value = in.nextString();
                 LogTagsUtils.i("===collection====value:" + value);

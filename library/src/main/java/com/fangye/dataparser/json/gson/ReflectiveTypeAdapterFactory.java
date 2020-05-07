@@ -316,6 +316,8 @@ public class ReflectiveTypeAdapterFactory implements TypeAdapterFactory {
 
         @Override
         public T read(JsonReader in) throws IOException {
+
+            //增加判断是错误的NULL的类型（应该是object）,移动in的下标到结束，移动下标的代码在下方
             if (in.peek() == JsonToken.NULL) {
                 in.nextNull();
                 return constructor.construct();
@@ -326,6 +328,7 @@ public class ReflectiveTypeAdapterFactory implements TypeAdapterFactory {
                 GsonUtils.readArray(in);
                 return constructor.construct();
             }
+
             //增加判断是错误的NUMBER的类型（应该是object）,移动in的下标到结束，移动下标的代码在下方
             if (in.peek() == JsonToken.NUMBER) {
                 in.nextDouble();
@@ -333,6 +336,7 @@ public class ReflectiveTypeAdapterFactory implements TypeAdapterFactory {
             }
 
             //增加判断是错误的String的类型（应该是object）,移动in的下标到结束，移动下标的代码在下方
+            //如果给的object是一个转义的字符串，此处会单独处理解析返回
             if (in.peek() == JsonToken.STRING) {
                 String value = in.nextString();
                 String path = in.getPath();
@@ -346,9 +350,6 @@ public class ReflectiveTypeAdapterFactory implements TypeAdapterFactory {
                     return (T) CommonJsonBuilder.fromJson(value, constructor.construct().getClass());
                 }
 
-//                if(value.startsWith("[") && value.endsWith("]")){
-//                    return (T) CommonJsonBuilder.fromJson(value, constructor.construct().getClass());
-//                }
                 return constructor.construct();
             }
 

@@ -106,16 +106,17 @@ public final class MapTypeAdapterFactory implements TypeAdapterFactory {
 
     @Override public Map<K, V> read(JsonReader in) throws IOException {
       JsonToken peek = in.peek();
+      //增加判断是错误NULL的类型（应该是OBJECT）,移动in的下标到结束，移动下标的代码在下方
       if (peek == JsonToken.NULL) {
         in.nextNull();
         return constructor.construct();
       }
-
+      //增加判断是错误NUMBER的类型（应该是OBJECT）,移动in的下标到结束，移动下标的代码在下方
       if (in.peek() == JsonToken.NUMBER) {
         in.nextDouble();
         return constructor.construct();
       }
-
+      //增加判断是错误STRING的类型（应该是OBJECT）,移动in的下标到结束，移动下标的代码在下方
       if(peek == JsonToken.STRING){
         String value = in.nextString();
         LogTagsUtils.i("===map====value:" + value);
@@ -124,17 +125,17 @@ public final class MapTypeAdapterFactory implements TypeAdapterFactory {
         }
         return constructor.construct();
       }
-
+      //增加判断是错误NAME的类型（应该是OBJECT）,移动in的下标到结束，移动下标的代码在下方
       if (in.peek() == JsonToken.NAME) {
         in.nextName();
         return constructor.construct();
       }
-
+      //增加判断是错误BOOLEAN的类型（应该是OBJECT）,移动in的下标到结束，移动下标的代码在下方
       if (in.peek() == JsonToken.BOOLEAN) {
         in.nextBoolean();
         return constructor.construct();
       }
-
+      //增加判断是错误BEGIN_ARRAY的类型（应该是OBJECT）,移动in的下标到结束，移动下标的代码在下方
       if (in.peek() == JsonToken.BEGIN_ARRAY) {
         GsonUtils.readArray(in);
         LogTagsUtils.i("==7=in.peek:" + peek);
@@ -161,9 +162,6 @@ public final class MapTypeAdapterFactory implements TypeAdapterFactory {
           JsonReaderInternalAccess.INSTANCE.promoteNameToValue(in);
           K key = keyTypeAdapter.read(in);
           V value = valueTypeAdapter.read(in);
-//          if(value!=null && value.toString().startsWith("{")){
-//
-//          }
           V replaced = map.put(key, value);
           if (replaced != null) {
             throw new JsonSyntaxException("duplicate key: " + key);
