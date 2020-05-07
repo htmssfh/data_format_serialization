@@ -87,6 +87,8 @@ public class CommonJsonBuilder {
             f = builder.getDeclaredField("instanceCreators");
             f.setAccessible(true);
             final Map<Type, InstanceCreator<?>> val = (Map<Type, InstanceCreator<?>>) f.get(gsonBuilder);//得到此属性的值
+            //注册Char类型处理器
+//            gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(char.class, Character.class, GsonUtils.charTypeAdapter()));
             //注册String类型处理器
             gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(String.class, GsonUtils.stringTypeAdapter()));
             //注册int.class, Integer.class处理器
