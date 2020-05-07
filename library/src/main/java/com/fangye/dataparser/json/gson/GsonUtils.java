@@ -39,9 +39,9 @@ public class GsonUtils {
     //float
     public static final int OBJECT_TYPE_FLOAT = 5;
 
-    //short最小值
+    //byte最小值
     private static final long BYTE_MIN = -128L;
-    //short最大值
+    //byte最大值
     private static final long BYTE_MAX = 127L;
 
     //short最小值
