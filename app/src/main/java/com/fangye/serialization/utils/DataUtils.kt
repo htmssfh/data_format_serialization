@@ -132,6 +132,7 @@ class DataUtils {
 
         fun getList(type:Int):MutableList<JsonItemEntity>?{
             when (type) {
+                DataJsonActivity.TYPE_BYTE-> return getByteList()
                 DataJsonActivity.TYPE_SHORT -> return getShortList()
                 DataJsonActivity.TYPE_INT -> return getIntList()
                 DataJsonActivity.TYPE_LONG -> return getLongList()
@@ -594,7 +595,7 @@ class DataUtils {
             val dataShortJson2 = "{\"id\":1232.6,\"name\":\"sssss\"}"
 
             val dataShortName3 = "3、要short ，short（-32768 32767）给的括号之外会的值（int/long），解析返回0 ，当然也可让程序崩溃"
-            val dataShortJson3 = "{\"id\":-32768,\"name\":\"sssss\"}"
+            val dataShortJson3 = "{\"id\":32768,\"name\":\"sssss\"}"
 
             val dataShortName4 = "4、要short ,给的boolean ,解析返回0"
             val dataShortJson4 = "{\"id\":true,\"name\":\"sssss\"}"
@@ -635,6 +636,60 @@ class DataUtils {
             list.add(JsonItemEntity(dataShortName10, dataShortJson10))
             list.add(JsonItemEntity(dataShortName11, dataShortJson11))
             list.add(JsonItemEntity(dataShortName12, dataShortJson12))
+
+            return addIllegalLists(list)
+        }
+
+        private fun getByteList(): MutableList<JsonItemEntity> {
+            val list = mutableListOf<JsonItemEntity>()
+            val dataByteName1 = "1、要byte ，给的为byte ,数据正常，解析正常"
+            val dataByteJson1 = "{\"id\":1,\"name\":\"sssss\"}"
+
+            val dataByteName2 = "2、要byte ，给的float或者double ,解析返回 (short)0，当然也可让程序崩溃"
+            val dataByteJson2 = "{\"id\":1232.6,\"name\":\"sssss\"}"
+
+            val dataByteName3 = "3、要byte ，short（-128 127）给的括号之外会的值（short/int/long），解析返回0 ，当然也可让程序崩溃"
+            val dataByteJson3 = "{\"id\":128,\"name\":\"sssss\"}"
+
+            val dataByteName4 = "4、要byte,给的boolean ,解析返回0"
+            val dataByteJson4 = "{\"id\":true,\"name\":\"sssss\"}"
+
+            val dataByteName5 = "5、要byte ，给的空字符串 ，解析返回0"
+            val dataByteJson5 = "{\"id\":\"\",\"name\":\"sssss\"}"
+
+            val dataByteName6 = "6、要byte ，给的字符串 ，解析返回0"
+            val dataByteJson6 = "{\"id\":\"sdssdfs\",\"name\":\"sssss\"}"
+
+            val dataByteName7 = "7、要byte ，给的字符串boolean，解析返回0"
+            val dataByteJson7 = "{\"id\":\"true\",\"name\":\"sssss\"}"
+
+            val dataByteName8 = "8、要byte 给的字符串short ,没有问题，可正常解析"
+            val dataByteJson8 = "{\"id\":\"16\",\"name\":\"sssss\"}"
+
+            val dataByteName9 = "9、要byte 给的字符串byte ,超过byte取值范围（-128 127）, 解析返回0，当然也可让程序崩溃"
+            val dataByteJson9 = "{\"id\":\"128\",\"name\":\"sssss\"}"
+
+            val dataByteName10 = "10、要byte 给的字符串float/double ,解析返回0"
+            val dataByteJson10 = "{\"id\":\"1.6555555\",\"name\":\"sssss\"}"
+
+            val dataByteName11 = "11、要byte 给的object，解析返回0"
+            val dataByteJson11 = "{\"id\":{\"aa\":\"00\"},\"name\":\"sssss\"}"
+
+            val dataByteName12 = "12、要byte 给的array，解析返回0"
+            val dataByteJson12 = "{\"id\":[{\"aa\":\"00\"}],\"name\":\"sssss\"}"
+
+            list.add(JsonItemEntity(dataByteName1, dataByteJson1))
+            list.add(JsonItemEntity(dataByteName2, dataByteJson2))
+            list.add(JsonItemEntity(dataByteName3, dataByteJson3))
+            list.add(JsonItemEntity(dataByteName4, dataByteJson4))
+            list.add(JsonItemEntity(dataByteName5, dataByteJson5))
+            list.add(JsonItemEntity(dataByteName6, dataByteJson6))
+            list.add(JsonItemEntity(dataByteName7, dataByteJson7))
+            list.add(JsonItemEntity(dataByteName8, dataByteJson8))
+            list.add(JsonItemEntity(dataByteName9, dataByteJson9))
+            list.add(JsonItemEntity(dataByteName10, dataByteJson10))
+            list.add(JsonItemEntity(dataByteName11, dataByteJson11))
+            list.add(JsonItemEntity(dataByteName12, dataByteJson12))
 
             return addIllegalLists(list)
         }

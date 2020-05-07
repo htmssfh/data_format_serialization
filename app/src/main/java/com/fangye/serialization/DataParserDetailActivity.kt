@@ -68,6 +68,13 @@ class DataParserDetailActivity:AppCompatActivity(), View.OnClickListener {
     private fun dataParse() {
         val start = System.currentTimeMillis();
         when (mType) {
+            DataJsonActivity.TYPE_BYTE -> {
+                var byteTest = CommonJsonBuilder.toObject(mJson, ByteEntity::class.java)
+                val time = System.currentTimeMillis() -start
+                mViewBinding.tvResult.text = CommonJsonBuilder.toJson(byteTest)+"\n\n耗时:$time 毫秒"
+                mViewBinding.tvLine.visibility = View.VISIBLE
+            }
+
             DataJsonActivity.TYPE_SHORT -> {
                 var shortTest = CommonJsonBuilder.toObject(mJson, ShortEntity::class.java)
                 val time = System.currentTimeMillis() -start

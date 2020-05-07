@@ -30,7 +30,7 @@ import java.util.Map;
 /**
  * 作者: shijiaxiong
  * 时间: 2019/9/26
- * 邮箱: shijiaxiong@moyi365.com
+ * 邮箱: fanyeren51@gmail.com
  * 功能:
  * <p>
  * 1）CommonJsonBuilder.newGson()得到Gson对象
@@ -38,12 +38,12 @@ import java.util.Map;
  * 3）同时提供了三个方法 toObject 和toObjectArray/toArraysList ，将字符串转成Object 和 array
  * <p>
  * 解决:
- * 1)要{}后端给了 []、空字符串、字符串、数字, 均返回实例对象{},为空对象，length为0 ,
+ * 1)要{}后端给了 []、空字符串、字符串、数字（Number）, 均返回实例对象{},为空对象，length为0 ,
  * 传入非标准json格式、传入html的格式或其它非json格式，会直接报异常  JsonSyntaxException
  * <p>
- * 2）要map对象 ,后端给了[]、空字符串、字符串、boolean、数字，均返回实例对象{}
+ * 2）要map对象 ,后端给了[]、空字符串、字符串、boolean、数字（Number），均返回实例对象{}
  * <p>
- * 3)要[]后端给了 {}、空字符串、字符串、数字，均返回空数组[] ，length 为0
+ * 3)要[]后端给了 {}、空字符串、字符串、数字（Number），均返回空数组[] ，length 为0
  * 传入非标准json格式、传入html的格式或其它非json格式，不会报异常，会直接返回[]
  * <p>
  * 4)要int.class, Integer.class,short.class, Short.class,long.class, Long.class,double.class, Double.class,
@@ -90,9 +90,11 @@ public class CommonJsonBuilder {
             //注册String类型处理器
             gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(String.class, GsonUtils.stringTypeAdapter()));
             //注册int.class, Integer.class处理器
-            gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(int.class, Integer.class, GsonUtils.longAdapter(GsonUtils.OBJECT_TYPE_INT)));
+            gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(byte.class, Byte.class, GsonUtils.longAdapter(GsonUtils.OBJECT_TYPE_BYTE)));
             //注册short.class, Short.class处理器
             gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(short.class, Short.class, GsonUtils.longAdapter(GsonUtils.OBJECT_TYPE_SHORT)));
+            //注册int.class, Integer.class处理器
+            gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(int.class, Integer.class, GsonUtils.longAdapter(GsonUtils.OBJECT_TYPE_INT)));
             //注册long.class, Long.class处理器
             gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(long.class, Long.class, GsonUtils.longAdapter(GsonUtils.OBJECT_TYPE_LONG)));
             //注册double.class, Double.class处理器

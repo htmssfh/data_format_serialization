@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 //        setContentView(R.layout.main_activity)
         mViewBinding  = MainActivityBinding.inflate(LayoutInflater.from(this))
         setContentView(mViewBinding.root)
+        mViewBinding?.btnDefaultByteTest.setOnClickListener(this)
         mViewBinding?.btnDefaultShortTest.setOnClickListener(this)
         mViewBinding?.btnDefaultIntTest.setOnClickListener(this)
         mViewBinding?.btnDefaultLongTest.setOnClickListener(this)
@@ -34,6 +35,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when(v?.id){
+            R.id.btn_default_byte_test -> {
+                //默认为byte
+                DataJsonActivity.startIntent(this,DataJsonActivity.TYPE_BYTE)
+            }
             R.id.btn_default_short_test ->{
                 //默认为short
                 DataJsonActivity.startIntent(this,DataJsonActivity.TYPE_SHORT)

@@ -26,16 +26,23 @@ import java.util.Collection;
  */
 public class GsonUtils {
 
+    //byte
+    public static final int OBJECT_TYPE_BYTE = 0;
     //short
-    public static final int OBJECT_TYPE_SHORT = 0;
+    public static final int OBJECT_TYPE_SHORT = 1;
     //int
-    public static final int OBJECT_TYPE_INT = 1;
+    public static final int OBJECT_TYPE_INT = 2;
     //long
-    public static final int OBJECT_TYPE_LONG = 2;
+    public static final int OBJECT_TYPE_LONG = 3;
     //double
-    public static final int OBJECT_TYPE_DOUBLE =3;
+    public static final int OBJECT_TYPE_DOUBLE =4;
     //float
-    public static final int OBJECT_TYPE_FLOAT = 4;
+    public static final int OBJECT_TYPE_FLOAT = 5;
+
+    //short最小值
+    private static final long BYTE_MIN = -128L;
+    //short最大值
+    private static final long BYTE_MAX = 127L;
 
     //short最小值
     private static final long SHORT_MIN = -32768L;
@@ -51,11 +58,12 @@ public class GsonUtils {
 
     /**
      * @param type
-     *     public static final int OBJECT_TYPE_SHORT = 0;(short.class, Short.class)
-     *     public static final int OBJECT_TYPE_INT = 1;(int.class, Integer.class )
-     *     public static final int OBJECT_TYPE_LONG = 2;(long.class,Long.class)
-     *     public static final int OBJECT_TYPE_DOUBLE =3;(double.class, Double.class)
-     *     public static final int OBJECT_TYPE_FLOAT = 4;(float.class, Float.class)
+     *     public static final int OBJECT_TYPE_BYTE = 0;(short.class, Short.class)
+     *     public static final int OBJECT_TYPE_SHORT = 1;(short.class, Short.class)
+     *     public static final int OBJECT_TYPE_INT = 2;(int.class, Integer.class )
+     *     public static final int OBJECT_TYPE_LONG = 3;(long.class,Long.class)
+     *     public static final int OBJECT_TYPE_DOUBLE =4;(double.class, Double.class)
+     *     public static final int OBJECT_TYPE_FLOAT = 5;(float.class, Float.class)
      *
      * @return TypeAdapter
      */
@@ -95,10 +103,12 @@ public class GsonUtils {
                 //以上判断的几种错误类型，不对，则直接返回默认值
                 if (isNot) {
                     switch (type) {
-                        case OBJECT_TYPE_INT:
-                            return 0;
+                        case OBJECT_TYPE_BYTE:
+                            return (byte)0;
                         case OBJECT_TYPE_SHORT:
                             return (short) 0;
+                        case OBJECT_TYPE_INT:
+                            return 0;
                         case OBJECT_TYPE_LONG:
                             return (long)0;
                         case OBJECT_TYPE_DOUBLE:
@@ -112,6 +122,30 @@ public class GsonUtils {
 
                 try {
                     switch (type) {
+                        case OBJECT_TYPE_BYTE:
+                            //Byte
+                            if (in.peek() == JsonToken.STRING) {
+                                //暂不做处理
+                                return toByte(in.nextString()).byteValue();
+                            }else if(in.peek() == JsonToken.NUMBER){
+                                //数字类型
+
+                                // 判断是不是浮点类型，如果是则解析 返回0
+                                String numberStr = in.nextString();
+                                if (judgeDouble(numberStr)) {
+                                    return (byte) 0;
+                                }
+
+                                // 判断取值范围是否正确，如果不正确，则解析返回0
+                                Long aLong = toLong(numberStr);
+                                if(aLong.longValue()>BYTE_MAX||aLong<BYTE_MIN){
+                                    return (byte)0;
+                                }
+                                return (byte)aLong.longValue();
+                            }
+
+                            return (byte) in.nextInt();
+
                         case OBJECT_TYPE_SHORT:
                             //short
                             if (in.peek() == JsonToken.STRING) {
@@ -128,7 +162,7 @@ public class GsonUtils {
 
                                 // 判断取值范围是否正确，如果不正确，则解析返回0
                                 Long aLong = toLong(numberStr);
-                                if(aLong.longValue()>=SHORT_MAX||aLong<=SHORT_MIN){
+                                if(aLong.longValue()>SHORT_MAX||aLong<SHORT_MIN){
                                     return (short)0;
                                 }
                                 return (short)aLong.longValue();
@@ -151,7 +185,7 @@ public class GsonUtils {
 
                                 // 判断取值范围是否正确，如果不正确，则解析返回0
                                 Long aLong = toLong(numberStr);
-                                if(aLong.longValue()>=INT_MAX||aLong<=INT_MIN){
+                                if(aLong.longValue()>INT_MAX||aLong<INT_MIN){
                                     return 0;
                                 }
 
@@ -416,6 +450,22 @@ public class GsonUtils {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Byte转换
+     *
+     * @param data 输入
+     * @return Short
+     */
+    public static Byte toByte(String data) {
+        Byte result = 0;
+        try {
+            result = Byte.valueOf(data);
+        } catch (Exception e) {
+        }
+
+        return result;
     }
 
     /**

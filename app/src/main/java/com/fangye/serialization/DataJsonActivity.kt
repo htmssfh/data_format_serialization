@@ -25,16 +25,16 @@ import com.fangye.serialization.utils.DataUtils
 class DataJsonActivity : AppCompatActivity(), OnItemChildClickListener {
 
     companion object{
-
-        const val TYPE_SHORT= 1
-        const val TYPE_INT= 2
-        const val TYPE_LONG= 3
-        const val TYPE_FLOAT= 4
-        const val TYPE_DOUBLE= 5
-        const val TYPE_STRING= 6
-        const val TYPE_OBJECT= 7
-        const val TYPE_ARRAY= 8
-        const val TYPE_MAP= 9
+        const val TYPE_BYTE = 1
+        const val TYPE_SHORT= 2
+        const val TYPE_INT= 3
+        const val TYPE_LONG= 4
+        const val TYPE_FLOAT= 5
+        const val TYPE_DOUBLE= 6
+        const val TYPE_STRING= 7
+        const val TYPE_OBJECT= 8
+        const val TYPE_ARRAY= 9
+        const val TYPE_MAP= 10
         const val TYPE_NO_JSON =0
         private const val TYPE_NAME = "type"
 
