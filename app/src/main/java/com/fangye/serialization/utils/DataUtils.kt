@@ -132,6 +132,7 @@ class DataUtils {
 
         fun getList(type:Int):MutableList<JsonItemEntity>?{
             when (type) {
+                DataJsonActivity.TYPE_BOOLEAN -> return getBooleanList()
                 DataJsonActivity.TYPE_BYTE-> return getByteList()
                 DataJsonActivity.TYPE_SHORT -> return getShortList()
                 DataJsonActivity.TYPE_INT -> return getIntList()
@@ -145,6 +146,61 @@ class DataUtils {
                 DataJsonActivity.TYPE_NO_JSON -> return getIllegalList()
             }
            return null
+        }
+
+        private fun getBooleanList(): MutableList<JsonItemEntity> {
+            val list = mutableListOf<JsonItemEntity>()
+            val dataBooleanName1 = "1、要boolean ，给的为boolean ,数据正常，解析正常"
+            val dataBooleanJson1 = "{\"id\":100,\"name\":\"sssss\",\"status\":true}"
+
+            val dataBooleanName2 = "2、要boolean ，给的float或者double ,解析返回"
+            val dataBooleanJson2 = "{\"id\":100,\"name\":\"sssss\",\"status\":1.6}"
+
+            val dataBooleanName3 = "3、要boolean ，给的byte/short/int/long，解析返回"
+            val dataBooleanJson3 = "{\"id\":100,\"name\":\"sssss\",\"status\":14}"
+
+            val dataBooleanName4 = "4、要boolean ，给的空字符串 ，解析返回"
+            val dataBooleanJson4 = "{\"id\":100,\"name\":\"sssss\",\"status\":\"\"}"
+
+            val dataBooleanName5 = "5、要boolean ，给的字符串 ，解析返回"
+            val dataBooleanJson5 = "{\"id\":100,\"name\":\"sssss\",\"status\":\"sss\"}"
+
+            val dataBooleanName6 = "6、要boolean ，给的字符串boolean，解析正常返回"
+            val dataBooleanJson6 = "{\"id\":100,\"name\":\"sssss\",\"status\":\"true\"}"
+
+            val dataBooleanName7 = "7、要boolean 给的字符串int/short/byte/long ，解析返回"
+            val dataBooleanJson7 = "{\"id\":100,\"name\":\"sssss\",\"status\":\"111\"}"
+
+            val dataBooleanName8 = "8、要boolean 给的字符串float/double ,解析返false"
+            val dataBooleanJson8 = "{\"id\":100,\"name\":\"sssss\",\"status\":\"111.3\"}"
+
+            val dataBooleanName9 = "9、要boolean 给的object，解析返回"
+            val dataBooleanJson9 = "{\"id\":100,\"name\":\"sssss\",\"status\":{\"id\":\"888\"}}"
+
+            val dataBooleanName10 = "10、要boolean 给的array，解析返回"
+            val dataBooleanJson10 = "{\"id\":100,\"name\":\"sssss\",\"status\":[{\"id\":\"888\"}]}"
+
+            val dataBooleanName11 = "11、要boolean 给的转义的object，解析返回false"
+            val dataBooleanJson11 = "{\"id\":100,\"name\":\"sssss\",\"status\":\"{\\\"id\\\":\\\"888\\\"}\"}"
+
+            val dataBooleanName12 = "12要boolean 给的转义的array，解析返回false"
+            val dataBooleanJson12 = "{\"id\":100,\"name\":\"sssss\",\"status\":\"[{\\\"id\\\":\\\"888\\\"}]\"}"
+
+
+            list.add(JsonItemEntity(dataBooleanName1, dataBooleanJson1))
+            list.add(JsonItemEntity(dataBooleanName2, dataBooleanJson2))
+            list.add(JsonItemEntity(dataBooleanName3, dataBooleanJson3))
+            list.add(JsonItemEntity(dataBooleanName4, dataBooleanJson4))
+            list.add(JsonItemEntity(dataBooleanName5, dataBooleanJson5))
+            list.add(JsonItemEntity(dataBooleanName6, dataBooleanJson6))
+            list.add(JsonItemEntity(dataBooleanName7, dataBooleanJson7))
+            list.add(JsonItemEntity(dataBooleanName8, dataBooleanJson8))
+            list.add(JsonItemEntity(dataBooleanName9, dataBooleanJson9))
+            list.add(JsonItemEntity(dataBooleanName10, dataBooleanJson10))
+            list.add(JsonItemEntity(dataBooleanName11, dataBooleanJson11))
+            list.add(JsonItemEntity(dataBooleanName12, dataBooleanJson12))
+
+            return  addIllegalLists(list)
         }
 
         private fun addIllegalLists(list: MutableList<JsonItemEntity>):MutableList<JsonItemEntity>{

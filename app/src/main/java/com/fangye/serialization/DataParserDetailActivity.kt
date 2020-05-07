@@ -96,6 +96,13 @@ class DataParserDetailActivity:AppCompatActivity(), View.OnClickListener {
                 mViewBinding.tvLine.visibility = View.VISIBLE
             }
 
+            DataJsonActivity.TYPE_BOOLEAN -> {
+                var booleanTest = CommonJsonBuilder.toObject(mJson, BooleanEntity::class.java)
+                val time = System.currentTimeMillis() -start
+                mViewBinding.tvResult.text = CommonJsonBuilder.toJson(booleanTest)+"\n\n耗时:$time 毫秒"
+                mViewBinding.tvLine.visibility = View.VISIBLE
+            }
+
             DataJsonActivity.TYPE_FLOAT -> {
                 var floatTest = CommonJsonBuilder.toObject(mJson, FloatEntity::class.java)
                 val time = System.currentTimeMillis() -start

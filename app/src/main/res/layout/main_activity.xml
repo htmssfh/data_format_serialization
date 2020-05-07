@@ -50,6 +50,15 @@
 
         <Button
             android:textColor="#333333"
+            android:id="@+id/btn_default_boolean_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:padding="10dp"
+            android:text="要boolean，服务端返回其它格式的各种情况" />
+
+        <Button
+            android:textColor="#333333"
             android:id="@+id/btn_default_float_test"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

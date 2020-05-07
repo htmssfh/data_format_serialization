@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         mViewBinding?.btnDefaultArrayTest.setOnClickListener(this)
         mViewBinding?.btnDefaultMapTest.setOnClickListener(this)
         mViewBinding?.btnDefaultOtherTest.setOnClickListener(this)
+        mViewBinding?.btnDefaultBooleanTest.setOnClickListener(this)
 
     }
 
@@ -50,6 +51,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.btn_default_long_test ->{
                 //默认为long
                 DataJsonActivity.startIntent(this,DataJsonActivity.TYPE_LONG)
+            }
+            R.id.btn_default_boolean_test -> {
+                DataJsonActivity.startIntent(this,DataJsonActivity.TYPE_BOOLEAN)
             }
             R.id.btn_default_float_test ->{
                 //默认为float
