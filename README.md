@@ -65,6 +65,9 @@
 
 ## 二.更新日志
 
+### 1.0.2
+1、添加log输出，方便调试
+
 ### 1.0.1
 1、支持boolean和byte的自定义适配
 2、JsonObject和JsonArray 转义问题处理
@@ -90,7 +93,7 @@ allprojects {
 ### 3.2、添加依赖
 ```
 dependencies {
-    implementation 'com.github.fangyeren:data_format_serialization:1.0.1'
+    implementation 'com.github.fangyeren:data_format_serialization:1.0.2'
 }
 ```
 
