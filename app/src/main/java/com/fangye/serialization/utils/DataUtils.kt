@@ -263,7 +263,7 @@ class DataUtils {
             val dataObjectJson7 = "{\"id\":\"111\",\"title\":\"培养一种习惯\",\"describe\":\"\",\"imageUrl\":\"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1588652393&di=798779f1fbc18ed59bca3433c57ca01a&src=http://a2.att.hudong.com/36/48/19300001357258133412489354717.jpg\",\"data7\":\"\"}"
 
             val dataObjectName8 = "8、要object,给的字符串，解析返回{}"
-            val dataObjectJson8 = "{\"id\":\"111\",\"title\":\"培养一种习惯\",\"describe\":\"\",\"imageUrl\":\"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1588652393&di=798779f1fbc18ed59bca3433c57ca01a&src=http://a2.att.hudong.com/36/48/19300001357258133412489354717.jpg\",\"data8\":\"\"}"
+            val dataObjectJson8 = "{\"id\":\"111\",\"title\":\"培养一种习惯\",\"describe\":\"\",\"imageUrl\":\"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1588652393&di=798779f1fbc18ed59bca3433c57ca01a&src=http://a2.att.hudong.com/36/48/19300001357258133412489354717.jpg\",\"data8\":\"sdfsfds\"}"
 
             val dataObjectName9 = "9、要object,给的array，解析返回{}"
             val dataObjectJson9 = "{\"id\":\"111\",\"title\":\"培养一种习惯\",\"describe\":\"\",\"imageUrl\":\"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1588652393&di=798779f1fbc18ed59bca3433c57ca01a&src=http://a2.att.hudong.com/36/48/19300001357258133412489354717.jpg\",\"data9\":[{\"url\":\"https://www.baidu.com/event/emlesson\",\"intentData\":{\"className_ios\":\"WebViewBaseVC\",\"className_android\":\"com.fanye.serialization.MainActivity\"}}]}"

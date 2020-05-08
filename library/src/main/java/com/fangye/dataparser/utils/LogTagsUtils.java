@@ -20,7 +20,7 @@ public class LogTagsUtils {
         return mLogLevel;
     }
 
-    public void setLogLevel(boolean level) {
+    public static void setLogLevel(boolean level) {
         mLogLevel = level;
     }
 

@@ -47,6 +47,6 @@ dependencies {
     kapt 'com.android.databinding:compiler:3.0.0'
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.2'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
-//    implementation project(path: ':library')
-   implementation 'com.github.fangyeren:data_format_serialization:1.0.1'
+    implementation project(path: ':library')
+//   implementation 'com.github.fangyeren:data_format_serialization:1.0.1'
 }

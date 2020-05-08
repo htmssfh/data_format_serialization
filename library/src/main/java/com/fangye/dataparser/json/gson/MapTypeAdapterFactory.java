@@ -52,6 +52,7 @@ import java.util.Map;
 public final class MapTypeAdapterFactory implements TypeAdapterFactory {
   private final ConstructorConstructor constructorConstructor;
   final boolean complexMapKeySerialization;
+  private final String TYPE_MAP = "Map";
 
   public MapTypeAdapterFactory(ConstructorConstructor constructorConstructor,
                                boolean complexMapKeySerialization) {
@@ -95,50 +96,62 @@ public final class MapTypeAdapterFactory implements TypeAdapterFactory {
     private final ObjectConstructor<? extends Map<K, V>> constructor;
 
     public Adapter(Gson context, Type keyType, TypeAdapter<K> keyTypeAdapter,
-        Type valueType, TypeAdapter<V> valueTypeAdapter,
-        ObjectConstructor<? extends Map<K, V>> constructor) {
+                   Type valueType, TypeAdapter<V> valueTypeAdapter,
+                   ObjectConstructor<? extends Map<K, V>> constructor) {
       this.keyTypeAdapter =
-        new TypeAdapterRuntimeTypeWrapper<K>(context, keyTypeAdapter, keyType);
+              new TypeAdapterRuntimeTypeWrapper<K>(context, keyTypeAdapter, keyType);
       this.valueTypeAdapter =
-        new TypeAdapterRuntimeTypeWrapper<V>(context, valueTypeAdapter, valueType);
+              new TypeAdapterRuntimeTypeWrapper<V>(context, valueTypeAdapter, valueType);
       this.constructor = constructor;
     }
 
     @Override public Map<K, V> read(JsonReader in) throws IOException {
       JsonToken peek = in.peek();
-      //增加判断是错误NULL的类型（应该是OBJECT）,移动in的下标到结束，移动下标的代码在下方
+
+      //增加判断是错误的NULL的类型（应该是object-map）,移动in的下标到结束，移动下标的代码在下方
       if (peek == JsonToken.NULL) {
+        LogTagsUtils.e(String.format(GsonUtils.EXCEPTION_COMMON_CONTENT,TYPE_MAP,JsonToken.NULL));
         in.nextNull();
         return constructor.construct();
       }
-      //增加判断是错误NUMBER的类型（应该是OBJECT）,移动in的下标到结束，移动下标的代码在下方
+
+      //增加判断是错误的NUMBER的类型（应该是object-map）,移动in的下标到结束，移动下标的代码在下方
       if (in.peek() == JsonToken.NUMBER) {
+        LogTagsUtils.e(String.format(GsonUtils.EXCEPTION_COMMON_CONTENT,TYPE_MAP,JsonToken.NUMBER));
         in.nextDouble();
         return constructor.construct();
       }
-      //增加判断是错误STRING的类型（应该是OBJECT）,移动in的下标到结束，移动下标的代码在下方
+      //增加判断是错误的STRING的类型（应该是object-map）,移动in的下标到结束，移动下标的代码在下方
       if(peek == JsonToken.STRING){
         String value = in.nextString();
         LogTagsUtils.i("===map====value:" + value);
         if(value.startsWith("{")&&value.endsWith("}")){
+          LogTagsUtils.i(String.format(GsonUtils.EXCEPTION_COMMON_CONTENT,TYPE_MAP,JsonToken.STRING));
           return CommonJsonBuilder.fromJson(value,new TypeToken<Map<K, V>>() { }.getType());
         }
+        LogTagsUtils.e(String.format(GsonUtils.EXCEPTION_COMMON_CONTENT,TYPE_MAP,Boolean.valueOf(value) ?JsonToken.STRING+"_"+JsonToken.BOOLEAN:JsonToken.STRING));
         return constructor.construct();
       }
-      //增加判断是错误NAME的类型（应该是OBJECT）,移动in的下标到结束，移动下标的代码在下方
+
+      //增加判断是错误的NAME的类型（应该是object-map）,移动in的下标到结束，移动下标的代码在下方
       if (in.peek() == JsonToken.NAME) {
+        LogTagsUtils.e(String.format(GsonUtils.EXCEPTION_COMMON_CONTENT,TYPE_MAP,JsonToken.NAME));
         in.nextName();
         return constructor.construct();
       }
-      //增加判断是错误BOOLEAN的类型（应该是OBJECT）,移动in的下标到结束，移动下标的代码在下方
+
+      //增加判断是错误的BOOLEAN的类型（应该是object-map）,移动in的下标到结束，移动下标的代码在下方
       if (in.peek() == JsonToken.BOOLEAN) {
+        LogTagsUtils.e(String.format(GsonUtils.EXCEPTION_COMMON_CONTENT,TYPE_MAP,JsonToken.BOOLEAN));
         in.nextBoolean();
         return constructor.construct();
       }
-      //增加判断是错误BEGIN_ARRAY的类型（应该是OBJECT）,移动in的下标到结束，移动下标的代码在下方
+
+      // TODO: 2020/3/30  ,源码单独对array的处理，情况不明
+      //增加判断是错误的BEGIN_ARRAY的类型（应该是object-map）,移动in的下标到结束，移动下标的代码在下方
       if (in.peek() == JsonToken.BEGIN_ARRAY) {
+        LogTagsUtils.e(String.format(GsonUtils.EXCEPTION_COMMON_CONTENT,TYPE_MAP,JsonToken.BEGIN_ARRAY));
         GsonUtils.readArray(in);
-        LogTagsUtils.i("==7=in.peek:" + peek);
         return constructor.construct();
       }
 

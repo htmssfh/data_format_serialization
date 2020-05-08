@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import com.fangye.dataparser.json.CommonJsonBuilder
+import com.fangye.dataparser.utils.LogTagsUtils
 import com.fangye.serialization.databinding.MainActivityBinding
 
 /**
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         mViewBinding?.btnDefaultMapTest.setOnClickListener(this)
         mViewBinding?.btnDefaultOtherTest.setOnClickListener(this)
         mViewBinding?.btnDefaultBooleanTest.setOnClickListener(this)
+        LogTagsUtils.setLogLevel(true)
     }
 
     override fun onClick(v: View?) {

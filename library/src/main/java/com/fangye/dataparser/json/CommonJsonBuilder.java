@@ -89,33 +89,39 @@ public class CommonJsonBuilder {
             f = builder.getDeclaredField("instanceCreators");
             f.setAccessible(true);
             final Map<Type, InstanceCreator<?>> val = (Map<Type, InstanceCreator<?>>) f.get(gsonBuilder);//得到此属性的值
+
             //注册Char类型处理器
-//            gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(char.class, Character.class, GsonUtils.charTypeAdapter()));
-            //注册String类型处理器
-            gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(String.class, GsonUtils.stringTypeAdapter()));
+            // gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(char.class, Character.class, GsonUtils.charTypeAdapter()));
             //注册int.class, Integer.class处理器
-            gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(byte.class, Byte.class, GsonUtils.longAdapter(GsonUtils.OBJECT_TYPE_BYTE)));
+            gsonBuilder.registerTypeAdapterFactory(
+                    TypeAdapters.newFactory(byte.class, Byte.class, GsonUtils.longAdapter(GsonUtils.GSON_TYPE_BYTE)));
             //注册short.class, Short.class处理器
-            gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(short.class, Short.class, GsonUtils.longAdapter(GsonUtils.OBJECT_TYPE_SHORT)));
-            //注册int.class, Integer.class处理器
-            gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(int.class, Integer.class, GsonUtils.longAdapter(GsonUtils.OBJECT_TYPE_INT)));
+            gsonBuilder.registerTypeAdapterFactory(
+                    TypeAdapters.newFactory(short.class, Short.class, GsonUtils.longAdapter(GsonUtils.GSON_TYPE_SHORT)));
             //注册long.class, Long.class处理器
-            gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(long.class, Long.class, GsonUtils.longAdapter(GsonUtils.OBJECT_TYPE_LONG)));
-            //注册double.class, Double.class处理器
-            gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(double.class, Double.class, GsonUtils.longAdapter(GsonUtils.OBJECT_TYPE_DOUBLE)));
+            gsonBuilder.registerTypeAdapterFactory(
+                    TypeAdapters.newFactory(long.class, Long.class, GsonUtils.longAdapter(GsonUtils.GSON_TYPE_LONG)));
             //注册float.class, Float.class处理器
-            gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(float.class, Float.class, GsonUtils.longAdapter(GsonUtils.OBJECT_TYPE_FLOAT)));
+            gsonBuilder.registerTypeAdapterFactory(
+                    TypeAdapters.newFactory(float.class, Float.class, GsonUtils.longAdapter(GsonUtils.GSON_TYPE_FLOAT)));
+            //注册double.class, Double.class处理器
+            gsonBuilder.registerTypeAdapterFactory(
+                    TypeAdapters.newFactory(double.class, Double.class, GsonUtils.longAdapter(GsonUtils.GSON_TYPE_DOUBLE)));
             //注册boolean.class,Boolean.class处理器
             gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(boolean.class, Boolean.class, GsonUtils.booleanTypeAdapter()));
-            //注册反射对象的处理器
+            //注册String类型处理器
+            gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(String.class, GsonUtils.stringTypeAdapter()));
+            //注册反射object的处理器
             gsonBuilder.registerTypeAdapterFactory(
                     new ReflectiveTypeAdapterFactory(new ConstructorConstructor(val), FieldNamingPolicy.IDENTITY, Excluder.DEFAULT));
-            //注册集合的处理器
+            //注册集合Array的处理器
             gsonBuilder.registerTypeAdapterFactory(new CollectionTypeAdapterFactory(new ConstructorConstructor(val)));
+            //注册Map 处理器
             //支持Map的key为复杂对象的形式 ，如：Map<Point, String> map = new LinkedHashMap<Point, String>();
-            gsonBuilder.enableComplexMapKeySerialization();
-            //注册Map集合的处理器
             gsonBuilder.registerTypeAdapterFactory(new MapTypeAdapterFactory(new ConstructorConstructor(val), true));
+
+            //支持Map的key为复杂对象的形式 ，上面一行代码已经设置过了，下面注释
+            //gsonBuilder.enableComplexMapKeySerialization();
             //对json结果格式化.
             gsonBuilder.setPrettyPrinting();
         } catch (Exception e) {
