@@ -2,7 +2,7 @@ package com.fangye.dataparser.json;
 
 
 import com.fangye.dataparser.json.gson.CollectionTypeAdapterFactory;
-import com.fangye.dataparser.json.gson.GsonUtils;
+import com.fangye.dataparser.json.gson.GsonTypeAdapterTools;
 import com.fangye.dataparser.json.gson.MapTypeAdapterFactory;
 import com.fangye.dataparser.json.gson.ReflectiveTypeAdapterFactory;
 import com.google.gson.FieldNamingPolicy;
@@ -94,23 +94,23 @@ public class CommonJsonBuilder {
             // gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(char.class, Character.class, GsonUtils.charTypeAdapter()));
             //注册int.class, Integer.class处理器
             gsonBuilder.registerTypeAdapterFactory(
-                    TypeAdapters.newFactory(byte.class, Byte.class, GsonUtils.longAdapter(GsonUtils.GSON_TYPE_BYTE)));
+                    TypeAdapters.newFactory(byte.class, Byte.class, GsonTypeAdapterTools.longAdapter(GsonTypeAdapterTools.GSON_TYPE_BYTE)));
             //注册short.class, Short.class处理器
             gsonBuilder.registerTypeAdapterFactory(
-                    TypeAdapters.newFactory(short.class, Short.class, GsonUtils.longAdapter(GsonUtils.GSON_TYPE_SHORT)));
+                    TypeAdapters.newFactory(short.class, Short.class, GsonTypeAdapterTools.longAdapter(GsonTypeAdapterTools.GSON_TYPE_SHORT)));
             //注册long.class, Long.class处理器
             gsonBuilder.registerTypeAdapterFactory(
-                    TypeAdapters.newFactory(long.class, Long.class, GsonUtils.longAdapter(GsonUtils.GSON_TYPE_LONG)));
+                    TypeAdapters.newFactory(long.class, Long.class, GsonTypeAdapterTools.longAdapter(GsonTypeAdapterTools.GSON_TYPE_LONG)));
             //注册float.class, Float.class处理器
             gsonBuilder.registerTypeAdapterFactory(
-                    TypeAdapters.newFactory(float.class, Float.class, GsonUtils.longAdapter(GsonUtils.GSON_TYPE_FLOAT)));
+                    TypeAdapters.newFactory(float.class, Float.class, GsonTypeAdapterTools.longAdapter(GsonTypeAdapterTools.GSON_TYPE_FLOAT)));
             //注册double.class, Double.class处理器
             gsonBuilder.registerTypeAdapterFactory(
-                    TypeAdapters.newFactory(double.class, Double.class, GsonUtils.longAdapter(GsonUtils.GSON_TYPE_DOUBLE)));
+                    TypeAdapters.newFactory(double.class, Double.class, GsonTypeAdapterTools.longAdapter(GsonTypeAdapterTools.GSON_TYPE_DOUBLE)));
             //注册boolean.class,Boolean.class处理器
-            gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(boolean.class, Boolean.class, GsonUtils.booleanTypeAdapter()));
+            gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(boolean.class, Boolean.class, GsonTypeAdapterTools.booleanTypeAdapter()));
             //注册String类型处理器
-            gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(String.class, GsonUtils.stringTypeAdapter()));
+            gsonBuilder.registerTypeAdapterFactory(TypeAdapters.newFactory(String.class, GsonTypeAdapterTools.stringTypeAdapter()));
             //注册反射object的处理器
             gsonBuilder.registerTypeAdapterFactory(
                     new ReflectiveTypeAdapterFactory(new ConstructorConstructor(val), FieldNamingPolicy.IDENTITY, Excluder.DEFAULT));

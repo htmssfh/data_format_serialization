@@ -133,21 +133,21 @@ public class CollectionTypeAdapterFactory implements TypeAdapterFactory {
 
             //增加判断是错误NULL的类型（应该是ARRAY）,移动in的下标到结束，移动下标的代码在下方
             if (in.peek() == JsonToken.NULL) {
-                LogTagsUtils.e(String.format(GsonUtils.EXCEPTION_COMMON_CONTENT,JsonToken.BEGIN_ARRAY,JsonToken.NULL));
+                LogTagsUtils.e(String.format(GsonTypeAdapterTools.EXCEPTION_COMMON_CONTENT,JsonToken.BEGIN_ARRAY,JsonToken.NULL));
                 in.nextNull();
                 return constructor.construct();
             }
 
             //增加判断是错误OBJECT的类型（应该是ARRAY）,移动in的下标到结束，移动下标的代码在下方
             if (in.peek() == JsonToken.BEGIN_OBJECT) {
-                LogTagsUtils.e(String.format(GsonUtils.EXCEPTION_COMMON_CONTENT,JsonToken.BEGIN_ARRAY,JsonToken.BEGIN_OBJECT));
-                GsonUtils.readObject(in);
+                LogTagsUtils.e(String.format(GsonTypeAdapterTools.EXCEPTION_COMMON_CONTENT,JsonToken.BEGIN_ARRAY,JsonToken.BEGIN_OBJECT));
+                GsonTypeAdapterTools.readObject(in);
                 return constructor.construct();
             }
 
             //增加判断是错误的NUMBER的类型（应该是ARRAY）,移动in的下标到结束，移动下标的代码在下方
             if (in.peek() == JsonToken.NUMBER) {
-                LogTagsUtils.e(String.format(GsonUtils.EXCEPTION_COMMON_CONTENT,JsonToken.BEGIN_ARRAY,JsonToken.NUMBER));
+                LogTagsUtils.e(String.format(GsonTypeAdapterTools.EXCEPTION_COMMON_CONTENT,JsonToken.BEGIN_ARRAY,JsonToken.NUMBER));
                 in.nextDouble();
                 return constructor.construct();
             }
@@ -156,23 +156,23 @@ public class CollectionTypeAdapterFactory implements TypeAdapterFactory {
             if (in.peek() == JsonToken.STRING) {
                 String value = in.nextString();
                 if(value.startsWith("[") && value.endsWith("]")){
-                    LogTagsUtils.i(String.format(GsonUtils.EXCEPTION_COMMON_CONTENT,JsonToken.BEGIN_ARRAY,JsonToken.STRING)+"\nvalue:"+value);
+                    LogTagsUtils.i(String.format(GsonTypeAdapterTools.EXCEPTION_COMMON_CONTENT,JsonToken.BEGIN_ARRAY,JsonToken.STRING)+"\nvalue:"+value);
                     return CommonJsonBuilder.fromJson(value, constructor.construct().getClass());
                 }
-                LogTagsUtils.e(String.format(GsonUtils.EXCEPTION_COMMON_CONTENT,JsonToken.BEGIN_ARRAY,Boolean.valueOf(value) ?JsonToken.STRING+"_"+JsonToken.BOOLEAN:JsonToken.STRING)+"\nvalue:"+value);
+                LogTagsUtils.e(String.format(GsonTypeAdapterTools.EXCEPTION_COMMON_CONTENT,JsonToken.BEGIN_ARRAY,Boolean.valueOf(value) ?JsonToken.STRING+"_"+JsonToken.BOOLEAN:JsonToken.STRING)+"\nvalue:"+value);
                 return constructor.construct();
             }
 
             //增加判断是错误的name的类型（应该是ARRAY）,移动in的下标到结束，移动下标的代码在下方
             if (in.peek() == JsonToken.NAME) {
-                LogTagsUtils.e(String.format(GsonUtils.EXCEPTION_COMMON_CONTENT,JsonToken.BEGIN_ARRAY,JsonToken.NAME));
+                LogTagsUtils.e(String.format(GsonTypeAdapterTools.EXCEPTION_COMMON_CONTENT,JsonToken.BEGIN_ARRAY,JsonToken.NAME));
                 in.nextName();
                 return constructor.construct();
             }
 
             //增加判断是错误的boolean的类型（应该是ARRAY）,移动in的下标到结束，移动下标的代码在下方
             if (in.peek() == JsonToken.BOOLEAN) {
-                LogTagsUtils.e(String.format(GsonUtils.EXCEPTION_COMMON_CONTENT,JsonToken.BEGIN_ARRAY,JsonToken.BOOLEAN));
+                LogTagsUtils.e(String.format(GsonTypeAdapterTools.EXCEPTION_COMMON_CONTENT,JsonToken.BEGIN_ARRAY,JsonToken.BOOLEAN));
                 in.nextBoolean();
                 return constructor.construct();
             }

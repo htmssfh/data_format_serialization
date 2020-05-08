@@ -25,7 +25,7 @@ import java.util.Collection;
  * @Author: fanyeren51@gmail.com
  * @UpdateDate: 2020/05/04 18:09
  */
-public class GsonUtils {
+public class GsonTypeAdapterTools {
 
     //byte
     public static final int GSON_TYPE_BYTE = 0;

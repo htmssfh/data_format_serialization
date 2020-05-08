@@ -110,14 +110,14 @@ public final class MapTypeAdapterFactory implements TypeAdapterFactory {
 
       //增加判断是错误的NULL的类型（应该是object-map）,移动in的下标到结束，移动下标的代码在下方
       if (peek == JsonToken.NULL) {
-        LogTagsUtils.e(String.format(GsonUtils.EXCEPTION_COMMON_CONTENT,TYPE_MAP,JsonToken.NULL));
+        LogTagsUtils.e(String.format(GsonTypeAdapterTools.EXCEPTION_COMMON_CONTENT,TYPE_MAP,JsonToken.NULL));
         in.nextNull();
         return constructor.construct();
       }
 
       //增加判断是错误的NUMBER的类型（应该是object-map）,移动in的下标到结束，移动下标的代码在下方
       if (in.peek() == JsonToken.NUMBER) {
-        LogTagsUtils.e(String.format(GsonUtils.EXCEPTION_COMMON_CONTENT,TYPE_MAP,JsonToken.NUMBER));
+        LogTagsUtils.e(String.format(GsonTypeAdapterTools.EXCEPTION_COMMON_CONTENT,TYPE_MAP,JsonToken.NUMBER));
         in.nextDouble();
         return constructor.construct();
       }
@@ -126,23 +126,23 @@ public final class MapTypeAdapterFactory implements TypeAdapterFactory {
         String value = in.nextString();
         LogTagsUtils.i("===map====value:" + value);
         if(value.startsWith("{")&&value.endsWith("}")){
-          LogTagsUtils.i(String.format(GsonUtils.EXCEPTION_COMMON_CONTENT,TYPE_MAP,JsonToken.STRING));
+          LogTagsUtils.i(String.format(GsonTypeAdapterTools.EXCEPTION_COMMON_CONTENT,TYPE_MAP,JsonToken.STRING));
           return CommonJsonBuilder.fromJson(value,new TypeToken<Map<K, V>>() { }.getType());
         }
-        LogTagsUtils.e(String.format(GsonUtils.EXCEPTION_COMMON_CONTENT,TYPE_MAP,Boolean.valueOf(value) ?JsonToken.STRING+"_"+JsonToken.BOOLEAN:JsonToken.STRING));
+        LogTagsUtils.e(String.format(GsonTypeAdapterTools.EXCEPTION_COMMON_CONTENT,TYPE_MAP,Boolean.valueOf(value) ?JsonToken.STRING+"_"+JsonToken.BOOLEAN:JsonToken.STRING));
         return constructor.construct();
       }
 
       //增加判断是错误的NAME的类型（应该是object-map）,移动in的下标到结束，移动下标的代码在下方
       if (in.peek() == JsonToken.NAME) {
-        LogTagsUtils.e(String.format(GsonUtils.EXCEPTION_COMMON_CONTENT,TYPE_MAP,JsonToken.NAME));
+        LogTagsUtils.e(String.format(GsonTypeAdapterTools.EXCEPTION_COMMON_CONTENT,TYPE_MAP,JsonToken.NAME));
         in.nextName();
         return constructor.construct();
       }
 
       //增加判断是错误的BOOLEAN的类型（应该是object-map）,移动in的下标到结束，移动下标的代码在下方
       if (in.peek() == JsonToken.BOOLEAN) {
-        LogTagsUtils.e(String.format(GsonUtils.EXCEPTION_COMMON_CONTENT,TYPE_MAP,JsonToken.BOOLEAN));
+        LogTagsUtils.e(String.format(GsonTypeAdapterTools.EXCEPTION_COMMON_CONTENT,TYPE_MAP,JsonToken.BOOLEAN));
         in.nextBoolean();
         return constructor.construct();
       }
@@ -150,8 +150,8 @@ public final class MapTypeAdapterFactory implements TypeAdapterFactory {
       // TODO: 2020/3/30  ,源码单独对array的处理，情况不明
       //增加判断是错误的BEGIN_ARRAY的类型（应该是object-map）,移动in的下标到结束，移动下标的代码在下方
       if (in.peek() == JsonToken.BEGIN_ARRAY) {
-        LogTagsUtils.e(String.format(GsonUtils.EXCEPTION_COMMON_CONTENT,TYPE_MAP,JsonToken.BEGIN_ARRAY));
-        GsonUtils.readArray(in);
+        LogTagsUtils.e(String.format(GsonTypeAdapterTools.EXCEPTION_COMMON_CONTENT,TYPE_MAP,JsonToken.BEGIN_ARRAY));
+        GsonTypeAdapterTools.readArray(in);
         return constructor.construct();
       }
 
