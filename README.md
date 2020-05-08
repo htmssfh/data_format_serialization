@@ -101,6 +101,9 @@ dependencies {
 > 更详细的使用请查看demo
 
 ```
+//LogTagsUtils.setLogLevel(true)  //打开日志输出，Loge 代表格式不对解析成默认值,
+                                  //Logi输出的信息代表该格式可以正常解析到数据,没有输出肯定是正常解析到数据了
+
 TestEntity objectAa =  CommonJsonBuilder.toObject(aa,TestEntity.class);
 Log.e("dataparse","objectAa.toString()======="+CommonJsonBuilder.toJson(objectAa));
 
