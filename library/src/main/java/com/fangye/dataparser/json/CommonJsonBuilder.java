@@ -98,6 +98,9 @@ public class CommonJsonBuilder {
             //注册short.class, Short.class处理器
             gsonBuilder.registerTypeAdapterFactory(
                     TypeAdapters.newFactory(short.class, Short.class, GsonTypeAdapterTools.longAdapter(GsonTypeAdapterTools.GSON_TYPE_SHORT)));
+            //注册int.class, Integer.class处理器
+            gsonBuilder.registerTypeAdapterFactory(
+                    TypeAdapters.newFactory(int.class, Integer.class, GsonTypeAdapterTools.longAdapter(GsonTypeAdapterTools.GSON_TYPE_INT)));
             //注册long.class, Long.class处理器
             gsonBuilder.registerTypeAdapterFactory(
                     TypeAdapters.newFactory(long.class, Long.class, GsonTypeAdapterTools.longAdapter(GsonTypeAdapterTools.GSON_TYPE_LONG)));
