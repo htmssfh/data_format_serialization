@@ -321,21 +321,24 @@ public class ReflectiveTypeAdapterFactory implements TypeAdapterFactory {
             if (in.peek() == JsonToken.NULL) {
                 LogTagsUtils.e(String.format(GsonTypeAdapterTools.EXCEPTION_COMMON_CONTENT,JsonToken.BEGIN_OBJECT,JsonToken.NULL));
                 in.nextNull();
-                return constructor.construct();
+                return null;
+//                return constructor.construct();
             }
 
             //增加判断是错误的ARRAY的类型（应该是object）,移动in的下标到结束，移动下标的代码在下方
             if (in.peek() == JsonToken.BEGIN_ARRAY) {
                 LogTagsUtils.e(String.format(GsonTypeAdapterTools.EXCEPTION_COMMON_CONTENT,JsonToken.BEGIN_OBJECT,JsonToken.BEGIN_ARRAY));
                 GsonTypeAdapterTools.readArray(in);
-                return constructor.construct();
+                return null;
+//                return constructor.construct();
             }
 
             //增加判断是错误的NUMBER的类型（应该是object）,移动in的下标到结束，移动下标的代码在下方
             if (in.peek() == JsonToken.NUMBER) {
                 LogTagsUtils.e(String.format(GsonTypeAdapterTools.EXCEPTION_COMMON_CONTENT,JsonToken.BEGIN_OBJECT,JsonToken.NUMBER));
                 in.nextDouble();
-                return constructor.construct();
+                return null;
+//                return constructor.construct();
             }
 
             //增加判断是错误的String的类型（应该是object）,移动in的下标到结束，移动下标的代码在下方
@@ -353,22 +356,24 @@ public class ReflectiveTypeAdapterFactory implements TypeAdapterFactory {
                     return (T) CommonJsonBuilder.fromJson(value, constructor.construct().getClass());
                 }
                 LogTagsUtils.e(String.format(GsonTypeAdapterTools.EXCEPTION_COMMON_CONTENT,JsonToken.BEGIN_OBJECT,Boolean.valueOf(value) ?JsonToken.STRING+"_"+JsonToken.BOOLEAN:JsonToken.STRING)+"\nvalue:"+value);
-
-                return constructor.construct();
+                return null;
+//                return constructor.construct();
             }
 
             //增加判断是错误的name的类型（应该是object）,移动in的下标到结束，移动下标的代码在下方
             if (in.peek() == JsonToken.NAME) {
                 LogTagsUtils.e(String.format(GsonTypeAdapterTools.EXCEPTION_COMMON_CONTENT,JsonToken.BEGIN_OBJECT,JsonToken.NAME));
                 in.nextName();
-                return constructor.construct();
+                return null;
+//                return constructor.construct();
             }
 
             //增加判断是错误的bookean的类型（应该是object）,移动in的下标到结束，移动下标的代码在下方
             if (in.peek() == JsonToken.BOOLEAN) {
                 LogTagsUtils.e(String.format(GsonTypeAdapterTools.EXCEPTION_COMMON_CONTENT,JsonToken.BEGIN_OBJECT,JsonToken.BOOLEAN));
                 in.nextBoolean();
-                return constructor.construct();
+                return null;
+//                return constructor.construct();
             }
 
             T instance = constructor.construct();

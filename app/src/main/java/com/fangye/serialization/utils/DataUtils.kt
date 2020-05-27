@@ -241,7 +241,7 @@ class DataUtils {
          */
         private fun getObjectList(): MutableList<JsonItemEntity> {
             val list = mutableListOf<JsonItemEntity>()
-            val dataObjectName1 = "1、要object ,给的float/double/short/int/long,解析返回{}"
+            val dataObjectName1 = "1、要object ,给的float/double/short/int/long,解析返回null"
             val dataObjectJson1 = "{\"id\":\"111\",\"title\":\"培养一种习惯\",\"describe\":\"\",\"imageUrl\":\"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1588652393&di=798779f1fbc18ed59bca3433c57ca01a&src=http://a2.att.hudong.com/36/48/19300001357258133412489354717.jpg\",\"data1\":2222}"
 
             val dataObjectName2 = "2、要object,给的object ，可正常解析返回"
@@ -250,25 +250,25 @@ class DataUtils {
             val dataObjectName3 = "3、要object,给的字符串object，被转义了 ,可正常返回"
             val dataObjectJson3 = "{\"id\":\"111\",\"title\":\"培养一种习惯\",\"describe\":\"\",\"imageUrl\":\"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1588652393&di=798779f1fbc18ed59bca3433c57ca01a&src=http://a2.att.hudong.com/36/48/19300001357258133412489354717.jpg\",\"data3\":\"{\\\"url\\\":\\\"https://www.baidu.com/event/emlesson\\\",\\\"intentData\\\":{\\\"className_ios\\\":\\\"WebViewBaseVC\\\",\\\"className_android\\\":\\\"com.fanye.serialization.MainActivity\\\"}}\"}"
 
-            val dataObjectName4 = "4、要object,给的boolean,解析返回{}"
+            val dataObjectName4 = "4、要object,给的boolean,解析返回null"
             val dataObjectJson4 = "{\"id\":\"111\",\"title\":\"培养一种习惯\",\"describe\":\"\",\"imageUrl\":\"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1588652393&di=798779f1fbc18ed59bca3433c57ca01a&src=http://a2.att.hudong.com/36/48/19300001357258133412489354717.jpg\",\"data4\":true}"
 
-            val dataObjectName5 = "5、要object,给的字符串boolean，解析返回{}"
+            val dataObjectName5 = "5、要object,给的字符串boolean，解析返回null"
             val dataObjectJson5 = "{\"id\":\"111\",\"title\":\"培养一种习惯\",\"describe\":\"\",\"imageUrl\":\"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1588652393&di=798779f1fbc18ed59bca3433c57ca01a&src=http://a2.att.hudong.com/36/48/19300001357258133412489354717.jpg\",\"data5\":\"true\"}"
 
-            val dataObjectName6 = "6、要object,给的字符串short/int/long/float/double，解析返回{}"
+            val dataObjectName6 = "6、要object,给的字符串short/int/long/float/double，解析返回null"
             val dataObjectJson6 = "{\"id\":\"111\",\"title\":\"培养一种习惯\",\"describe\":\"\",\"imageUrl\":\"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1588652393&di=798779f1fbc18ed59bca3433c57ca01a&src=http://a2.att.hudong.com/36/48/19300001357258133412489354717.jpg\",\"data6\":\"222\"}"
 
-            val dataObjectName7 = "7、要object,给的空字符串，解析返回{}"
+            val dataObjectName7 = "7、要object,给的空字符串，解析返回null"
             val dataObjectJson7 = "{\"id\":\"111\",\"title\":\"培养一种习惯\",\"describe\":\"\",\"imageUrl\":\"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1588652393&di=798779f1fbc18ed59bca3433c57ca01a&src=http://a2.att.hudong.com/36/48/19300001357258133412489354717.jpg\",\"data7\":\"\"}"
 
-            val dataObjectName8 = "8、要object,给的字符串，解析返回{}"
+            val dataObjectName8 = "8、要object,给的字符串，解析返回null"
             val dataObjectJson8 = "{\"id\":\"111\",\"title\":\"培养一种习惯\",\"describe\":\"\",\"imageUrl\":\"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1588652393&di=798779f1fbc18ed59bca3433c57ca01a&src=http://a2.att.hudong.com/36/48/19300001357258133412489354717.jpg\",\"data8\":\"sdfsfds\"}"
 
-            val dataObjectName9 = "9、要object,给的array，解析返回{}"
+            val dataObjectName9 = "9、要object,给的array，解析返回null"
             val dataObjectJson9 = "{\"id\":\"111\",\"title\":\"培养一种习惯\",\"describe\":\"\",\"imageUrl\":\"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1588652393&di=798779f1fbc18ed59bca3433c57ca01a&src=http://a2.att.hudong.com/36/48/19300001357258133412489354717.jpg\",\"data9\":[{\"url\":\"https://www.baidu.com/event/emlesson\",\"intentData\":{\"className_ios\":\"WebViewBaseVC\",\"className_android\":\"com.fanye.serialization.MainActivity\"}}]}"
 
-            val dataObjectName10 = "10、要object,给的字符串array，解析返回{}"
+            val dataObjectName10 = "10、要object,给的字符串array，解析返回null"
             val dataObjectJson10 = "{\"id\":\"111\",\"title\":\"培养一种习惯\",\"describe\":\"\",\"imageUrl\":\"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1588652393&di=798779f1fbc18ed59bca3433c57ca01a&src=http://a2.att.hudong.com/36/48/19300001357258133412489354717.jpg\",\"data10\":\"[{\\\"url\\\":\\\"https://www.baidu.com/event/emlesson\\\",\\\"intentData\\\":{\\\"className_ios\\\":\\\"WebViewBaseVC\\\",\\\"className_android\\\":\\\"com.fanye.serialization.MainActivity\\\"}}]\"}"
 
             list.add(JsonItemEntity(dataObjectName1, dataObjectJson1))
@@ -295,7 +295,7 @@ class DataUtils {
          */
         private fun getArrayList(): MutableList<JsonItemEntity> {
             val list = mutableListOf<JsonItemEntity>()
-            val dataArrayName1 = "1、要array,给的float/double/short/int/long,解析返回[]"
+            val dataArrayName1 = "1、要array,给的float/double/short/int/long,解析返回null"
             val dataArrayJson1 = "[{\"id\":\"111\",\"name\":\"ssss\",\"list1\":333}]"
 
             val dataArrayName2 = "2、要array，给的array，可正常返回"
@@ -316,25 +316,25 @@ class DataUtils {
             val dataArrayName7 = "7、要array,给的array嵌套array(List<Object>),可正常解析"
             val dataArrayJson7 = "[{\"id\":\"111\",\"name\":\"ssss\",\"list7\":[[{\"id\":\"11\",\"tab\":\"bb1\"}],[{\"id\":\"22\",\"tab\":\"bb2\"}]]}]"
 
-            val dataArrayName8 = "8、要array,给的boolean,解析返回[]"
+            val dataArrayName8 = "8、要array,给的boolean,解析返回null"
             val dataArrayJson8 = "[{\"id\":\"111\",\"name\":\"ssss\",\"list8\":true}]"
 
-            val dataArrayName9 = "9、要array,给的字符串boolean，解析返回[]"
+            val dataArrayName9 = "9、要array,给的字符串boolean，解析返回null"
             val dataArrayJson9 = "[{\"id\":\"111\",\"name\":\"ssss\",\"list9\":\"true\"}]"
 
-            val dataArrayName10 = "10、要array,给的字符串short/int/long/float/double,解析返回[]"
+            val dataArrayName10 = "10、要array,给的字符串short/int/long/float/double,解析返回null"
             val dataArrayJson10 = "[{\"id\":\"111\",\"name\":\"ssss\",\"list10\":\"111\"}]"
 
-            val dataArrayName11 = "11、要array,给的空字符串，解析返回[]"
+            val dataArrayName11 = "11、要array,给的空字符串，解析返回null"
             val dataArrayJson11 = "[{\"id\":\"111\",\"name\":\"ssss\",\"list11\":\"\"}]"
 
-            val dataArrayName12 = "12、要array,给的字符串，非json，解析返回[] "
+            val dataArrayName12 = "12、要array,给的字符串，非json，解析返回null "
             val dataArrayJson12 = "[{\"id\":\"111\",\"name\":\"ssss\",\"list12\":\"sdfsfs\"}]"
 
-            val dataArrayName13 = "13、要array,给的object，解析返回[]"
+            val dataArrayName13 = "13、要array,给的object，解析返回null"
             val dataArrayJson13 = "[{\"id\":\"111\",\"name\":\"ssss\",\"list13\":{\"android\":\"aaaa\",\"ios\":\"bbbb\"}}]"
 
-            val dataArrayName14 = "14、要array,给的字符串object，解析返回[]"
+            val dataArrayName14 = "14、要array,给的字符串object，解析返回null"
             val dataArrayJson14 = "[{\"id\":\"111\",\"name\":\"ssss\",\"list14\":\"{\\\"android\\\":\\\"aaaa\\\",\\\"ios\\\":\\\"bbbb\\\"}\"}]"
 
             list.add(JsonItemEntity(dataArrayName1, dataArrayJson1))
@@ -357,7 +357,7 @@ class DataUtils {
 
         private fun getMapList(): MutableList<JsonItemEntity> {
             val list = mutableListOf<JsonItemEntity>()
-            val dataMapName1 = "1、要Map ,给的float/double/short/int/long,解析返回{}"
+            val dataMapName1 = "1、要Map ,给的float/double/short/int/long,解析返回null"
             val dataMapJson1 = "{\"id\":\"111\",\"title\":\"培养一种习惯\",\"describe\":\"\",\"imageUrl\":\"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1588652393&di=798779f1fbc18ed59bca3433c57ca01a&src=http://a2.att.hudong.com/36/48/19300001357258133412489354717.jpg\",\"data1\":2222}"
 
             val dataMapName2 = "2、要Map,给的object ，可正常解析返回"
@@ -367,25 +367,25 @@ class DataUtils {
             val dataMapName3 = "3、要Map,给的字符串object，被转义了 ,可正常返回"
             val dataMapJson3 = "{\"id\":\"111\",\"title\":\"培养一种习惯\",\"describe\":\"\",\"imageUrl\":\"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1588652393&di=798779f1fbc18ed59bca3433c57ca01a&src=http://a2.att.hudong.com/36/48/19300001357258133412489354717.jpg\",\"data3\":\"{\\\"url\\\":\\\"https://www.baidu.com/event/emlesson\\\",\\\"intentData\\\":{\\\"className_ios\\\":\\\"WebViewBaseVC\\\",\\\"className_android\\\":\\\"com.fanye.serialization.MainActivity\\\"}}\"}"
 
-            val dataMapName4 = "4、要Map,给的boolean,解析返回{}"
+            val dataMapName4 = "4、要Map,给的boolean,解析返回null"
             val dataMapJson4 = "{\"id\":\"111\",\"title\":\"培养一种习惯\",\"describe\":\"\",\"imageUrl\":\"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1588652393&di=798779f1fbc18ed59bca3433c57ca01a&src=http://a2.att.hudong.com/36/48/19300001357258133412489354717.jpg\",\"data4\":true}"
 
-            val dataMapName5 = "5、要Map,给的字符串boolean，解析返回{}"
+            val dataMapName5 = "5、要Map,给的字符串boolean，解析返回null"
             val dataMapJson5 = "{\"id\":\"111\",\"title\":\"培养一种习惯\",\"describe\":\"\",\"imageUrl\":\"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1588652393&di=798779f1fbc18ed59bca3433c57ca01a&src=http://a2.att.hudong.com/36/48/19300001357258133412489354717.jpg\",\"data5\":\"true\"}"
 
-            val dataMapName6 = "6、要Map,给的字符串short/int/long/float/double，解析返回{}"
+            val dataMapName6 = "6、要Map,给的字符串short/int/long/float/double，解析返回null"
             val dataMapJson6 = "{\"id\":\"111\",\"title\":\"培养一种习惯\",\"describe\":\"\",\"imageUrl\":\"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1588652393&di=798779f1fbc18ed59bca3433c57ca01a&src=http://a2.att.hudong.com/36/48/19300001357258133412489354717.jpg\",\"data6\":\"222\"}"
 
-            val dataMapName7 = "7、要Map,给的空字符串，解析返回{}"
+            val dataMapName7 = "7、要Map,给的空字符串，解析返回null"
             val dataMapJson7 = "{\"id\":\"111\",\"title\":\"培养一种习惯\",\"describe\":\"\",\"imageUrl\":\"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1588652393&di=798779f1fbc18ed59bca3433c57ca01a&src=http://a2.att.hudong.com/36/48/19300001357258133412489354717.jpg\",\"data7\":\"\"}"
 
-            val dataMapName8 = "8、要Map,给的字符串，解析返回{}"
+            val dataMapName8 = "8、要Map,给的字符串，解析返回null"
             val dataMapJson8 = "{\"id\":\"111\",\"title\":\"培养一种习惯\",\"describe\":\"\",\"imageUrl\":\"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1588652393&di=798779f1fbc18ed59bca3433c57ca01a&src=http://a2.att.hudong.com/36/48/19300001357258133412489354717.jpg\",\"data8\":\"\"}"
 
-            val dataMapName9 = "9、要Map,给的array，解析返回{}"
+            val dataMapName9 = "9、要Map,给的array，解析返回null"
             val dataMapJson9 = "{\"id\":\"111\",\"title\":\"培养一种习惯\",\"describe\":\"\",\"imageUrl\":\"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1588652393&di=798779f1fbc18ed59bca3433c57ca01a&src=http://a2.att.hudong.com/36/48/19300001357258133412489354717.jpg\",\"data9\":[{\"url\":\"https://www.baidu.com/event/emlesson\",\"intentData\":{\"className_ios\":\"WebViewBaseVC\",\"className_android\":\"com.fanye.serialization.MainActivity\"}}]}"
 
-            val dataMapName10 = "10、要Map,给的字符串array，解析返回{}"
+            val dataMapName10 = "10、要Map,给的字符串array，解析返回null"
             val dataMapJson10 = "{\"id\":\"111\",\"title\":\"培养一种习惯\",\"describe\":\"\",\"imageUrl\":\"https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1588652393&di=798779f1fbc18ed59bca3433c57ca01a&src=http://a2.att.hudong.com/36/48/19300001357258133412489354717.jpg\",\"data10\":\"[{\\\"url\\\":\\\"https://www.baidu.com/event/emlesson\\\",\\\"intentData\\\":{\\\"className_ios\\\":\\\"WebViewBaseVC\\\",\\\"className_android\\\":\\\"com.fanye.serialization.MainActivity\\\"}}]\"}"
 
             list.add(JsonItemEntity(dataMapName1, dataMapJson1))
