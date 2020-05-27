@@ -453,6 +453,9 @@ public class GsonTypeAdapterTools {
                 } else if (in.peek() == JsonToken.NULL) {
                     //值为null的情况
                     in.nextNull();
+                    if(key!=null){
+                        jo.put(key, null);
+                    }
                 } else if (in.peek() == JsonToken.NAME) {
                     //键
                     key = in.nextName();
@@ -496,6 +499,7 @@ public class GsonTypeAdapterTools {
                 } else if (in.peek() == JsonToken.NULL) {
                     //为null 无需处理
                     in.nextNull();
+                    ja.put(null);
                 } else if (in.peek() == JsonToken.NAME) {
                     //array没有键，不用处理
                     key = in.nextName();
