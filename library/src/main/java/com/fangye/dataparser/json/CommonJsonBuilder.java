@@ -38,12 +38,12 @@ import java.util.Map;
  * 3）同时提供了三个方法 toObject 和toObjectArray/toArraysList ，将字符串转成Object 和 array
  * <p>
  * 解决:
- * 1)要{}后端给了 []、空字符串、字符串、数字（Number）, 均返回实例对象{},为空对象，length为0 ,
+ * 1)要{}后端给了 []、空字符串、字符串、数字（Number）, 均返回null ,不会崩溃，使用时需要判空，否则会崩溃,
  * 传入非标准json格式、传入html的格式或其它非json格式，会直接报异常  JsonSyntaxException
  * <p>
- * 2）要map对象 ,后端给了[]、空字符串、字符串、boolean、数字（Number），均返回实例对象{}
+ * 2）要map对象 ,后端给了[]、空字符串、字符串、boolean、数字（Number），均返回null ,不会崩溃，使用时需要判空，否则会崩溃
  * <p>
- * 3)要[]后端给了 {}、空字符串、字符串、数字（Number），均返回空数组[] ，length 为0
+ * 3)要[]后端给了 {}、空字符串、字符串、数字（Number），均返回null ,不会崩溃，使用时需要判空，否则会崩溃
  * 传入非标准json格式、传入html的格式或其它非json格式，不会报异常，会直接返回[]
  * <p>
  * 4)要int.class, Integer.class,short.class, Short.class,long.class, Long.class,double.class, Double.class,

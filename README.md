@@ -18,11 +18,11 @@
 >  支持解析实体、集合、Map、基本数据类型等 在 异常情况下， 处理为默认值 ，主要支持情况如下
 
 
- 1. 要{},后端给了 []、空字符串、字符串、数字、boolean, 均返回实例对象{},为空对象，length为0
+ 1. 要{},后端给了 []、空字符串、字符串、数字、boolean, 均返回null ,不会崩溃，使用时需要判空，否则会崩溃
 
     1.1、传入非标准json格式、传入html的格式或其它非json格式，会直接报异常  JsonSyntaxException
 
- 2. 要[]后端给了 {}、空字符串、字符串、数字、boolean，均返回空数组[] ，length 为0
+ 2. 要[]后端给了 {}、空字符串、字符串、数字、boolean，均返回null ,不会崩溃，使用时需要判空，否则会崩溃
 
     1.1、toObjectArray，传入非标准json格式、传入html的格式或其它非json格式，不会报异常，会直接返回[]
 
@@ -45,7 +45,7 @@
 
     4.3，如果后端给了基本数据类型或者boolean类型，则会将其转成String类型
 
- 5. 要map对象 ,后端给了[]、空字符串、字符串、boolean、数字，均返回实例对象{} ,即空map集合
+ 5. 要map对象 ,后端给了[]、空字符串、字符串、boolean、数字，均返回null ,不会崩溃，使用时需要判空，否则会崩溃
 
  6. 要boolean,服务端给byte/int/short/long/float/double/array/object/字符串，解析返回false
 
@@ -64,6 +64,9 @@
 正开发中。。。
 
 ## 二.更新日志
+
+### 1.0.4
+1、要object/array/map ，server返回格式不对，则解析返回null ,使用时需要判空
 
 ### 1.0.3
 1、添int 适配bug
@@ -96,7 +99,7 @@ allprojects {
 ### 3.2、添加依赖
 ```
 dependencies {
-    implementation 'com.github.fangyeren:data_format_serialization:1.0.3'
+    implementation 'com.github.fangyeren:data_format_serialization:1.0.4'
 }
 ```
 
