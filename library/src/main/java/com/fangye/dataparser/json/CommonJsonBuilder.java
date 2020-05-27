@@ -60,10 +60,13 @@ import java.util.Map;
  * <p>
  * 6)、要boolean,服务端给byte/int/short/long/float/double/array/object/字符串，解析返回false
  * <p>
- * 7)目前已知的三种崩溃情况
- * 7.1，传入xml  CommonJsonBuilder
- * 7.2，传入一个字符串
- * 7.3，传入一个错误的json
+ * 7). 要byte/short/int/long/boolean/float/double/String/map/object/array ,server端给返回null/字符串null的情况
+ * 7.1，基本数据和String类型，解析成默认类型
+ * 7.2，map/object/array类型，解析成null
+ * 8)目前已知的三种崩溃情况
+ * 8.1，传入xml  CommonJsonBuilder
+ * 8.2，传入一个字符串
+ * 8.3，传入一个错误的json
  *
  */
 public class CommonJsonBuilder {

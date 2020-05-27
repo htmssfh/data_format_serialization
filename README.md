@@ -49,7 +49,13 @@
 
  6. 要boolean,服务端给byte/int/short/long/float/double/array/object/字符串，解析返回false
 
- 7. 目前已知的三种崩溃情况
+ 7. 要byte/short/int/long/boolean/float/double/String/map/object/array ,server端给返回null/字符串null的情况
+
+    7.1，基本数据和String类型，解析成默认类型
+
+    7.2，map/object/array类型，解析成null
+
+ 8. 目前已知的三种崩溃情况
 
     7.1，传入xml  CommonJsonBuilder
 
@@ -64,6 +70,13 @@
 正开发中。。。
 
 ## 二.更新日志
+### 1.0.5
+1、要byte/short/int/long/boolean/float/double/String,服务端给null、字符串null,
+解析成各自的默认值
+
+2、map/object/array,服务端给null、字符串null，解析返回null ,toJson后会抛弃为null的字段,
+如果解析后，还需要将原数据给server端，服务端如需要处理这个为null的情况时 就可能导致错误，原因就是toJson后为null的字段会被抛弃
+
 
 ### 1.0.4
 1、要object/array/map ，server返回格式不对，则解析返回null ,使用时需要判空

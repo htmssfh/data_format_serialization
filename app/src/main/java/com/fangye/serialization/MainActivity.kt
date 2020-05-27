@@ -8,6 +8,7 @@ import android.view.View
 import com.fangye.dataparser.json.CommonJsonBuilder
 import com.fangye.dataparser.utils.LogTagsUtils
 import com.fangye.serialization.databinding.MainActivityBinding
+import com.fangye.serialization.entity.NullEntity
 
 /**
  * @Package: com.fangye.serialization
@@ -34,6 +35,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         mViewBinding?.btnDefaultMapTest.setOnClickListener(this)
         mViewBinding?.btnDefaultOtherTest.setOnClickListener(this)
         mViewBinding?.btnDefaultBooleanTest.setOnClickListener(this)
+        mViewBinding?.btnDefaultNullTest.setOnClickListener(this)
         LogTagsUtils.setLogLevel(true)
     }
 
@@ -81,6 +83,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.btn_default_map_test ->{
                 //默认为map
                 DataJsonActivity.startIntent(this,DataJsonActivity.TYPE_MAP)
+            }
+            R.id.btn_default_null_test -> {
+                //服务端返回null的各种情况
+                DataJsonActivity.startIntent(this,DataJsonActivity.TYPE_NULL)
             }
             else -> {
                 DataJsonActivity.startIntent(this,DataJsonActivity.TYPE_NO_JSON)

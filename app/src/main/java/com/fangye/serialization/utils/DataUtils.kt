@@ -1,5 +1,6 @@
 package com.fangye.serialization.utils
 
+import android.provider.ContactsContract
 import com.fangye.serialization.DataJsonActivity
 import com.fangye.serialization.entity.JsonItemEntity
 
@@ -11,10 +12,12 @@ import com.fangye.serialization.entity.JsonItemEntity
  */
 class DataUtils {
     companion object{
+        private const val NULL_NAME = "某些字段 服务端返回null的情况 解析"
         private const val XML_NAME = "直接传入xml格式的数据，传入非json数据，程序崩溃"
         private const val TEXT_NAME = "直接传入一个字符串，传入非json数据，程序崩溃"
         private const val TEXT_ILLEGAL_JSON_NAME = "传入一个非json数据，程序崩溃"
 
+        private const val TEXT_NULL_JSON = "{\"key\":\"15563021738ans_104_985806_1950\",\"dataReq\":null,\"dataReqs\":null,\"value\":{\"ans\":[null,\"uck\"],\"ans2\":{\"aaa\":null,\"bbb\":\"sssss\"},\"dataReq\":null,\"dataReqs\":null,\"itemIdMap\":{\"1\":\"1050236\"},\"time\":28},\"persistent\":true}"
         private const val TEXT_ILLEGAL_JSON = "{\"id\":\"1111\"\"name\":\"我不是一个json\"}"
         private const val TEXT = "sfdsfsfs"
         private const val XML = ("<!DOCTYPE html>\n"
@@ -143,9 +146,27 @@ class DataUtils {
                 DataJsonActivity.TYPE_OBJECT -> return getObjectList()
                 DataJsonActivity.TYPE_ARRAY -> return getArrayList()
                 DataJsonActivity.TYPE_MAP -> return getMapList()
+                DataJsonActivity.TYPE_NULL -> return getNullList()
                 DataJsonActivity.TYPE_NO_JSON -> return getIllegalList()
             }
            return null
+        }
+
+        private fun getNullList(): MutableList<JsonItemEntity> {
+            val list = mutableListOf<JsonItemEntity>()
+            val dataNullName = "要byte/short/int/long/boolean/float/double/map/object/array,服务端给null"
+            val dataNullJson = "{\"key\":\"15563021738ans_104_985806_1950\",\"testInt\":null,\"testShort\":null,\"testByte\":null,\"testLong\":null,\"testFloat\":null,\"testDouble\":null,\"testString\":null,\"testBoolean\":null,\"maps\":null,\"dataReq\":null,\"dataReqs\":null,\"dataReqRight\":{\"key\":\"sfdsfsfsfds\",\"callBack\":\"rwrwerwrwrtfdg3453\",\"testNull\":null},\"value\":{\"ans\":[null,\"uck\"],\"ans2\":{\"aaa\":null,\"bbb\":\"sssss\"},\"dataReq\":null,\"dataReqs\":null,\"itemIdMap\":{\"1\":\"1050236\"},\"time\":28},\"persistent\":true}"
+
+            val dataNullName1 = "要object,给的null"
+            val dataNullJson1 = "{\"key\":\"15563021738ans_104_985806_1950\",\"dataReq\":null,\"dataReqRight\":{\"key\":\"sfdsfsfsfds\",\"callBack\":\"rwrwerwrwrtfdg3453\",\"testNull\":null},\"value\":{\"ans\":[null,\"uck\"],\"ans2\":{\"aaa\":null,\"bbb\":\"sssss\"},\"dataReq\":null,\"dataReqs\":null,\"itemIdMap\":{\"1\":\"1050236\"},\"time\":28},\"persistent\":true}"
+
+            val dataNullName2 = "要byte/short/int/long/boolean/float/double/map/object/array,服务端给字符串null"
+            val dataNullJson2 = "{\"key\":\"15563021738ans_104_985806_1950\",\"testInt\":\"null\",\"testShort\":\"null\",\"testByte\":\"null\",\"testLong\":\"null\",\"testFloat\":\"null\",\"testDouble\":\"null\",\"testString\":\"null\",\"testBoolean\":\"null\",\"maps\":\"null\",\"dataReq\":\"null\",\"dataReqs\":\"null\",\"dataReqRight\":{\"key\":\"sfdsfsfsfds\",\"callBack\":\"rwrwerwrwrtfdg3453\",\"testNull\":\"null\"},\"value\":{\"ans\":[\"null\",\"uck\"],\"ans2\":{\"aaa\":\"null\",\"bbb\":\"sssss\"},\"dataReq\":\"null\",\"dataReqs\":\"null\",\"itemIdMap\":{\"1\":\"1050236\"},\"time\":28},\"persistent\":true}"
+
+            list.add(JsonItemEntity(dataNullName, dataNullJson))
+            list.add(JsonItemEntity(dataNullName1, dataNullJson1))
+            list.add(JsonItemEntity(dataNullName2, dataNullJson2))
+            return list
         }
 
         private fun getBooleanList(): MutableList<JsonItemEntity> {

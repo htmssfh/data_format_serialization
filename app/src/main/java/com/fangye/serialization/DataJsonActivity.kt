@@ -36,6 +36,7 @@ class DataJsonActivity : AppCompatActivity(), OnItemChildClickListener {
         const val TYPE_OBJECT= 9
         const val TYPE_ARRAY= 10
         const val TYPE_MAP= 11
+        const val TYPE_NULL= 12
         const val TYPE_NO_JSON =0
         private const val TYPE_NAME = "type"
 

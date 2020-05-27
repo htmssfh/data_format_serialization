@@ -1,19 +1,16 @@
 package com.fangye.dataparser.json.gson;
 
-import android.util.Log;
 
+import com.fangye.dataparser.json.DataJsonArray;
+import com.fangye.dataparser.json.DataJsonObject;
 import com.fangye.dataparser.utils.LogTagsUtils;
-import com.fangye.dataparser.utils.StringEscapeUtils;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.IOException;
 import java.util.Collection;
 
@@ -365,9 +362,9 @@ public class GsonTypeAdapterTools {
 
                 //增加判断是错误的BEGIN_OBJECT的类型（应该是String）,移动in的下标到结束，移动下标的代码在下方
                 if (in.peek() == JsonToken.BEGIN_OBJECT) {
-                    //此处 ，会将数据解析成JsonObject对象，转成string后赋值给string字段
+                    //此处 ，会将数据解析成DataJsonObject对象，转成string后赋值给string字段
                     LogTagsUtils.i(String.format(EXCEPTION_COMMON_CONTENT,JsonToken.STRING,JsonToken.BEGIN_OBJECT));
-                    JSONObject j = readObject(in);
+                    DataJsonObject j = readObject(in);
                     if(j==null||j.length()==0){
                         return "";
                     }
@@ -378,7 +375,7 @@ public class GsonTypeAdapterTools {
                 if (in.peek() == JsonToken.BEGIN_ARRAY) {
                     //此处会将数据解析成JsonArray对象，转成string后赋值给string字段
                     LogTagsUtils.i(String.format(EXCEPTION_COMMON_CONTENT,JsonToken.STRING,JsonToken.BEGIN_ARRAY));
-                    JSONArray j = readArray(in);
+                    DataJsonArray j = readArray(in);
                     if(j==null||j.length()==0){
                         return "";
                     }
@@ -397,14 +394,14 @@ public class GsonTypeAdapterTools {
     }
 
     /**
-     * 解析jsonArray
+     * 解析DataJsonArray
      *
      * @param in json数据
      * @throws IOException
      */
-    static JSONArray readArray(JsonReader in)
+    static DataJsonArray readArray(JsonReader in)
             throws IOException {
-        JSONArray jsonArray;
+        DataJsonArray jsonArray;
         in.beginArray();
         jsonArray = readJsonArray(in);
         in.endArray();
@@ -412,14 +409,14 @@ public class GsonTypeAdapterTools {
     }
 
     /**
-     * 解析jsonObject
+     * 解析DataJsonObject
      *
      * @param in json数据
      * @throws IOException
      */
-    static JSONObject readObject(JsonReader in)
+    static DataJsonObject readObject(JsonReader in)
             throws IOException {
-        JSONObject jsonObject;
+        DataJsonObject jsonObject;
         in.beginObject();
         jsonObject = readJsonObject(in);
         in.endObject();
@@ -432,10 +429,10 @@ public class GsonTypeAdapterTools {
      * @param in json数据
      * @throws IOException
      */
-    private static JSONObject readJsonObject(JsonReader in)
+    private static DataJsonObject readJsonObject(JsonReader in)
             throws IOException {
         String key = "";
-        JSONObject jo = new JSONObject();
+        DataJsonObject jo = new DataJsonObject();
         while (in.hasNext()) {
             try {
                 if (in.peek() == JsonToken.BEGIN_ARRAY) {
@@ -484,10 +481,10 @@ public class GsonTypeAdapterTools {
      * @param in json数据
      * @throws IOException
      */
-    private static JSONArray readJsonArray(JsonReader in)
+    private static DataJsonArray readJsonArray(JsonReader in)
             throws IOException {
         String key = "";
-        JSONArray ja = new JSONArray();
+        DataJsonArray ja = new DataJsonArray();
         while (in.hasNext()) {
             try {
                 if (in.peek() == JsonToken.BEGIN_ARRAY) {

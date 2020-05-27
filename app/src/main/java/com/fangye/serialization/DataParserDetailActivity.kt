@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.fangye.dataparser.json.CommonJsonBuilder
 import com.fangye.serialization.databinding.ActivityDataParserJsonBinding
 import com.fangye.serialization.entity.*
+import com.fangye.serialization.utils.JsonBuilder
 
 /**
  * 数据解析详情页面
@@ -140,6 +141,16 @@ class DataParserDetailActivity:AppCompatActivity(), View.OnClickListener {
                 val time = System.currentTimeMillis() -start
                 mViewBinding.tvResult.text = CommonJsonBuilder.toJson(mapE)+"\n\n耗时:$time 毫秒"
                 mViewBinding.tvLine.visibility = View.VISIBLE
+            }
+            DataJsonActivity.TYPE_NULL -> {
+                var mNullEntity = CommonJsonBuilder.toObject(mJson,NullEntity::class.java)
+                val time = System.currentTimeMillis() -start
+                mViewBinding.tvResult.text = CommonJsonBuilder.toJson(mNullEntity)+"\n\n耗时:$time 毫秒"
+                mViewBinding.tvLine.visibility = View.VISIBLE
+
+                var mNullEntity2 = JsonBuilder.toObject(mJson,NullEntity::class.java)
+                Log.e("dataparse","mNullEntity========>"+CommonJsonBuilder.toJson(mNullEntity))
+                Log.e("dataparse","mNullEntity2========>"+CommonJsonBuilder.toJson(mNullEntity2))
             }
             DataJsonActivity.TYPE_NO_JSON -> {
                 var illegalEntity = CommonJsonBuilder.toObject(mJson, IllegalDataEntity::class.java)

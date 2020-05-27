@@ -114,6 +114,15 @@
 
         <Button
             android:textColor="#333333"
+            android:id="@+id/btn_default_null_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:padding="10dp"
+            android:text="服务端返回null的一些情况" />
+
+        <Button
+            android:textColor="#333333"
             android:id="@+id/btn_default_other_test"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
