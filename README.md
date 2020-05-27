@@ -65,6 +65,9 @@
 
 ## 二.更新日志
 
+### 1.0.3
+1、添int 适配bug
+
 ### 1.0.2
 1、添加log输出，方便调试
 
@@ -93,7 +96,7 @@ allprojects {
 ### 3.2、添加依赖
 ```
 dependencies {
-    implementation 'com.github.fangyeren:data_format_serialization:1.0.2'
+    implementation 'com.github.fangyeren:data_format_serialization:1.0.3'
 }
 ```
 
