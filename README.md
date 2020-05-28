@@ -24,9 +24,9 @@
 
  2. 要[]后端给了 {}、空字符串、字符串、数字、boolean，均返回null ,不会崩溃，使用时需要判空，否则会崩溃
 
-    1.1、toObjectArray，传入非标准json格式、传入html的格式或其它非json格式，不会报异常，会直接返回[]
+    2.1、toObjectArray，传入非标准json格式、传入html的格式或其它非json格式，不会报异常，会直接返回null
 
-    1.2、toArraysList，如果数据格式不是[]，会报异常，使用时请关注
+    2.2、toArraysList，如果数据格式不是[]，会报异常，使用时请关注
 
  3. 要int.class, Integer.class,short.class, Short.class,long.class, Long.class,double.class, Double.class,
     float.class, Float.class 等情况
@@ -70,6 +70,13 @@
 正开发中。。。
 
 ## 二.更新日志
+### 1.0.6
+1、toObjectArray传入非标准json格式、传入html的格式或其它非json格式，不会报异常，会直接返回null,使用时判空
+
+2、修改JSONObject中的源码，支持可以传入null的情况
+
+3、要String ,server给了objct或者array ,object或array 中有null的情况，toJson后原样返回给 fe或server
+
 ### 1.0.5
 1、要byte/short/int/long/boolean/float/double/String,服务端给null、字符串null,
 解析成各自的默认值

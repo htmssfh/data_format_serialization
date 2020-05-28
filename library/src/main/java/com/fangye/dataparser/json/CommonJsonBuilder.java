@@ -16,7 +16,6 @@ import com.google.gson.internal.Excluder;
 import com.google.gson.internal.bind.TypeAdapters;
 import com.google.gson.stream.JsonReader;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.Reader;
@@ -44,7 +43,8 @@ import java.util.Map;
  * 2）要map对象 ,后端给了[]、空字符串、字符串、boolean、数字（Number），均返回null ,不会崩溃，使用时需要判空，否则会崩溃
  * <p>
  * 3)要[]后端给了 {}、空字符串、字符串、数字（Number），均返回null ,不会崩溃，使用时需要判空，否则会崩溃
- * 传入非标准json格式、传入html的格式或其它非json格式，不会报异常，会直接返回[]
+ *  3.1、传入非标准json格式、传入html的格式或其它非json格式，不会报异常，会直接返回null,使用时判空
+ *  3.2、toArraysList，如果数据格式不是[]，会报异常，使用时请关注
  * <p>
  * 4)要int.class, Integer.class,short.class, Short.class,long.class, Long.class,double.class, Double.class,
  * float.class, Float.class 等情况
@@ -207,7 +207,7 @@ public class CommonJsonBuilder {
      */
     public static <T> List<T> toObjectArray(String json, Class<T> c) {
         try {
-            JSONArray ja = new JSONArray(json);
+            DataJsonArray ja = new DataJsonArray(json);
             int length = ja.length();
             List<T> ret = new ArrayList<>(length);
             for (int i = 0; i < length; ++i) {
@@ -217,7 +217,8 @@ public class CommonJsonBuilder {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return new ArrayList<>();
+        return null;
+//        return new ArrayList<>();
 
         //        // 使用泛型，此种方式返回的是LinkedTreeMap,遍历得使用Iterator
         //        return fromJson(json, new TypeToken<List<T>>() {}.getType());
