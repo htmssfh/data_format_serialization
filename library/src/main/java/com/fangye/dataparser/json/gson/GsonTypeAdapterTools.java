@@ -431,7 +431,7 @@ public class GsonTypeAdapterTools {
      */
     private static DataJsonObject readJsonObject(JsonReader in)
             throws IOException {
-        String key = "";
+        String key = null;
         DataJsonObject jo = new DataJsonObject();
         while (in.hasNext()) {
             try {
