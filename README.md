@@ -119,7 +119,7 @@ allprojects {
 ### 3.2、添加依赖
 ```
 dependencies {
-    implementation 'com.github.fangyeren:data_format_serialization:1.0.4'
+    implementation 'com.github.fangyeren:data_format_serialization:1.0.6'
 }
 ```
 
