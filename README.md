@@ -70,6 +70,9 @@
 正开发中。。。
 
 ## 二.更新日志
+### 1.0.7
+1、解决一些引用出错的问题
+
 ### 1.0.6
 1、toObjectArray传入非标准json格式、传入html的格式或其它非json格式，不会报异常，会直接返回null,使用时判空
 
@@ -119,7 +122,7 @@ allprojects {
 ### 3.2、添加依赖
 ```
 dependencies {
-    implementation 'com.github.fangyeren:data_format_serialization:1.0.6'
+    implementation 'com.github.fangyeren:data_format_serialization:1.0.7'
 }
 ```
 

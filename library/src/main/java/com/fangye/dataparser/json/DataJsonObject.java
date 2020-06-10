@@ -17,7 +17,6 @@
 package com.fangye.dataparser.json;
 
 import org.json.JSONException;
-import org.json.JSONTokener;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -154,7 +153,7 @@ public class DataJsonObject {
      * @throws JSONException if the parse fails or doesn't yield a
      *     {@code DataJsonObject}.
      */
-    public DataJsonObject(JSONTokener readFrom) throws JSONException {
+    public DataJsonObject(DataJsonTokener readFrom) throws JSONException {
         /*
          * Getting the parser to populate this could get tricky. Instead, just
          * parse to temporary DataJsonObject and then steal the data from that.
@@ -176,7 +175,7 @@ public class DataJsonObject {
      *     DataJsonObject}.
      */
     public DataJsonObject(String json) throws JSONException {
-        this(new JSONTokener(json));
+        this(new DataJsonTokener(json));
     }
 
     /**

@@ -17,7 +17,6 @@
 package com.fangye.dataparser.json;
 
 import org.json.JSONException;
-import org.json.JSONTokener;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -87,7 +86,7 @@ public class DataJsonArray {
      * @throws JSONException if the parse fails or doesn't yield a
      *     {@code JSONArray}.
      */
-    public DataJsonArray(JSONTokener readFrom) throws JSONException {
+    public DataJsonArray(DataJsonTokener readFrom) throws JSONException {
         /*
          * Getting the parser to populate this could get tricky. Instead, just
          * parse to temporary JSONArray and then steal the data from that.
@@ -108,7 +107,7 @@ public class DataJsonArray {
      *     JSONArray}.
      */
     public DataJsonArray(String json) throws JSONException {
-        this(new JSONTokener(json));
+        this(new DataJsonTokener(json));
     }
 
     /**
