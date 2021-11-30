@@ -83,7 +83,7 @@ public class CommonJsonBuilder {
     /**
      * 生成注册自定义的对象处理器与集合处理器的Gson，方法
      */
-    private static Gson newGson() {
+    public static Gson newGson() {
         GsonBuilder gsonBuilder = new GsonBuilder();
         Class builder = (Class) gsonBuilder.getClass();
         Field f = null;
